@@ -1,0 +1,100 @@
+{
+  "title": "Virtueller Rundgang Heinrich-Büssing-Schule",
+  "startRoomId": "eingang",
+  "rooms": [
+    {
+      "id": "eingang",
+      "title": "Eingang",
+      "image": "images/eingang.jpg",
+      "hotspots": [
+        {
+          "id": "to_links",
+          "text": "Nach links",
+          "position": [-20, -5, -10],
+          "rotation": [0, 0, 0],
+          "scale": [10, 10, 10],
+          "action": {
+            "type": "teleport",
+            "targetRoomId": "links"
+          }
+        },
+        {
+          "id": "to_rechts",
+          "text": "Nach rechts",
+          "position": [20, -5, -10],
+          "rotation": [0, 0, 0],
+          "scale": [10, 10, 10],
+          "action": {
+            "type": "teleport",
+            "targetRoomId": "rechts"
+          }
+        },
+        {
+          "id": "to_innen",
+          "text": "Nach innen",
+          "position": [0, -5, -25],
+          "rotation": [0, 0, 0],
+          "scale": [10, 10, 10],
+          "action": {
+            "type": "teleport",
+            "targetRoomId": "innen"
+          }
+        }
+      ]
+    },
+    {
+      "id": "links",
+      "title": "Links",
+      "image": "images/links.jpg",
+      "hotspots": [
+        {
+          "id": "back_to_eingang_from_links",
+          "text": "Zurück zum Eingang",
+          "position": [0, -5, -20],
+          "rotation": [0, 0, 0],
+          "scale": [10, 10, 10],
+          "action": {
+            "type": "teleport",
+            "targetRoomId": "eingang"
+          }
+        }
+      ]
+    },
+    {
+      "id": "rechts",
+      "title": "Rechts",
+      "image": "images/rechts.jpg",
+      "hotspots": [
+        {
+          "id": "back_to_eingang_from_rechts",
+          "text": "Zurück zum Eingang",
+          "position": [0, -5, -20],
+          "rotation": [0, 0, 0],
+          "scale": [10, 10, 10],
+          "action": {
+            "type": "teleport",
+            "targetRoomId": "eingang"
+          }
+        }
+      ]
+    },
+    {
+      "id": "innen",
+      "title": "Innen",
+      "image": "images/innen.jpg",
+      "hotspots": [
+        {
+          "id": "back_to_eingang_from_innen",
+          "text": "Zurück zum Eingang",
+          "position": [0, -5, -20],
+          "rotation": [0, 0, 0],
+          "scale": [10, 10, 10],
+          "action": {
+            "type": "teleport",
+            "targetRoomId": "eingang"
+          }
+        }
+      ]
+    }
+  ]
+}

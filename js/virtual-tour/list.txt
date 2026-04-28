@@ -1,0 +1,17 @@
+ Volume in Laufwerk C: hat keine Bezeichnung.
+ Volumeseriennummer: 0AEB-3480
+
+ Verzeichnis von C:\xampp\htdocs\WebXrVirtualTour\js
+
+27.04.2026  12:09    <DIR>          .
+27.04.2026  12:07    <DIR>          ..
+27.04.2026  10:11               321 Action.js
+27.04.2026  10:11               316 ActionFactory.js
+27.04.2026  10:11               695 Hotspot.js
+27.04.2026  10:11               142 InitialView.js
+27.04.2026  12:09                 0 list.txt
+27.04.2026  10:11               529 Room.js
+27.04.2026  10:11               297 Vec3.js
+27.04.2026  10:11               781 VirtualTour.js
+               8 Datei(en),          3.081 Bytes
+               2 Verzeichnis(se), 290.665.005.056 Bytes frei

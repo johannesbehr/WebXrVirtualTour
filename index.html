@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>VirtualTour Debug</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background: #111;
+      color: #eee;
+    }
+	img {
+		width: 100%;
+		min-width: 150px; /* optional: nicht zu klein */
+		display: block;
+		margin-bottom: 20px;
+		border: 2px solid #444;
+	}
+    button {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<h1 id="roomTitle"></h1>
+<img id="roomImage" />
+<div id="actions"></div>
+
+<script type="module">
+import { VirtualTour } from './js/virtual-tour/virtual-tour.js';
+
+
+let tourUrl = "./tourdata/hbs_rundgang.json"
+const json = await fetch(tourUrl).then(r => r.json());
+const tour = new VirtualTour(json);
+
+let currentRoom = null;
+
+loadRoom(tour.startRoomId);
+
+/* =========================
+   Raum anzeigen
+========================= */
+
+function loadRoom(roomId) {
+  const room = tour.getRoom(roomId);
+  currentRoom = room;
+
+  document.getElementById("roomTitle").innerText =
+    `Du bist im Raum: ${room.title}`;
+
+  // 👉 Bild setzen
+  const img = document.getElementById("roomImage");
+  img.src = "tourdata/" + room.image;
+
+  const actionsDiv = document.getElementById("actions");
+  actionsDiv.innerHTML = "";
+
+  room.hotspots.forEach(h => {
+    // Nur Teleport-Actions berücksichtigen
+    if (h.action.type === "teleport") {
+      const btn = document.createElement("button");
+
+      btn.innerText = h.text || `Gehe zu ${h.action.targetRoomId}`;
+
+      btn.onclick = () => {
+        loadRoom(h.action.targetRoomId);
+      };
+
+      actionsDiv.appendChild(btn);
+    }
+  });
+
+  // Debug-Ausgabe
+  console.log("Aktueller Raum:", room);
+}
+</script>
+
+</body>
+</html>
