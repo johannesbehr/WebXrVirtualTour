@@ -1,84 +1,40 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>VirtualTour Debug</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      padding: 20px;
-      background: #111;
-      color: #eee;
-    }
-	img {
-		width: 100%;
-		min-width: 150px; /* optional: nicht zu klein */
-		display: block;
-		margin-bottom: 20px;
-		border: 2px solid #444;
-	}
-    button {
-      display: block;
-      margin: 10px 0;
-      padding: 10px;
-      font-size: 16px;
-    }
-  </style>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no'>
+    <meta name='mobile-web-app-capable' content='yes'>
+    <meta name='apple-mobile-web-app-capable' content='yes'>
+    <link rel='icon' type='image/png' sizes='32x32' href='favicon-32x32.png'>
+    <link rel='icon' type='image/png' sizes='96x96' href='favicon-96x96.png'>
+    <link rel='stylesheet' href='css/common.css'>
+
+	<title>Virtueller Rundgang</title>
 </head>
+
+
+
 <body>
 
-<h1 id="roomTitle"></h1>
-<img id="roomImage" />
-<div id="actions"></div>
 
+
+
+<header>
+      <details open>
+        <summary>Virtueller Rundgang</summary>
+        <p>
+			Ein virtueller Rundgang in VR.
+          <a class="back" href="./">Back</a>
+        </p>
+      </details>
+    </header>
+	
+	
 <script type="module">
-import { VirtualTour } from './js/virtual-tour/virtual-tour.js';
-
-
+import { VirtualTourScene } from './js/virtual-tour/virtual-tour-scene.js';
 let tourUrl = "./tourdata/hbs_rundgang.json"
-const json = await fetch(tourUrl).then(r => r.json());
-const tour = new VirtualTour(json);
-
-let currentRoom = null;
-
-loadRoom(tour.startRoomId);
-
-/* =========================
-   Raum anzeigen
-========================= */
-
-function loadRoom(roomId) {
-  const room = tour.getRoom(roomId);
-  currentRoom = room;
-
-  document.getElementById("roomTitle").innerText =
-    `Du bist im Raum: ${room.title}`;
-
-  // 👉 Bild setzen
-  const img = document.getElementById("roomImage");
-  img.src = "tourdata/" + room.image;
-
-  const actionsDiv = document.getElementById("actions");
-  actionsDiv.innerHTML = "";
-
-  room.hotspots.forEach(h => {
-    // Nur Teleport-Actions berücksichtigen
-    if (h.action.type === "teleport") {
-      const btn = document.createElement("button");
-
-      btn.innerText = h.text || `Gehe zu ${h.action.targetRoomId}`;
-
-      btn.onclick = () => {
-        loadRoom(h.action.targetRoomId);
-      };
-
-      actionsDiv.appendChild(btn);
-    }
-  });
-
-  // Debug-Ausgabe
-  console.log("Aktueller Raum:", room);
-}
+let scene = await VirtualTourScene.create(tourUrl);
+scene.initXR();
 </script>
 
 </body>

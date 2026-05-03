@@ -7,37 +7,37 @@
       "title": "Eingang",
       "image": "images/eingang.jpg",
       "hotspots": [
+        
         {
+          "id": "to_innen",
+          "text": "Nach innen",
+          "translation": [0, -10, 20],
+          "rotation": [0, 0.707, 0, 0.707],
+          "scale": [40, 40, 40],
+          "action": {
+            "type": "changeRoom",
+            "targetRoomId": "innen"
+          }
+        },{
           "id": "to_links",
           "text": "Nach links",
-          "position": [-20, -5, -10],
-          "rotation": [0, 0, 0],
-          "scale": [10, 10, 10],
+          "translation": [10, -10, 20],
+          "rotation": [0, 1, 0, 0],
+          "scale": [40, 40, 40],
           "action": {
-            "type": "teleport",
+            "type": "changeRoom",
             "targetRoomId": "links"
           }
         },
         {
           "id": "to_rechts",
           "text": "Nach rechts",
-          "position": [20, -5, -10],
-          "rotation": [0, 0, 0],
-          "scale": [10, 10, 10],
+          "translation": [-10, -10, 20],
+          "rotation": [0, 0, 0, 1],
+          "scale": [40, 40, 40],
           "action": {
-            "type": "teleport",
+            "type": "changeRoom",
             "targetRoomId": "rechts"
-          }
-        },
-        {
-          "id": "to_innen",
-          "text": "Nach innen",
-          "position": [0, -5, -25],
-          "rotation": [0, 0, 0],
-          "scale": [10, 10, 10],
-          "action": {
-            "type": "teleport",
-            "targetRoomId": "innen"
           }
         }
       ]
@@ -50,11 +50,11 @@
         {
           "id": "back_to_eingang_from_links",
           "text": "Zurück zum Eingang",
-          "position": [0, -5, -20],
-          "rotation": [0, 0, 0],
-          "scale": [10, 10, 10],
+          "translation": [0, -10, 20],
+          "rotation": [0, 0.707, 0, 0.707],
+          "scale": [40, 40, 40],
           "action": {
-            "type": "teleport",
+            "type": "changeRoom",
             "targetRoomId": "eingang"
           }
         }
@@ -68,11 +68,11 @@
         {
           "id": "back_to_eingang_from_rechts",
           "text": "Zurück zum Eingang",
-          "position": [0, -5, -20],
-          "rotation": [0, 0, 0],
-          "scale": [10, 10, 10],
+          "translation": [-20, -10, -0],
+          "rotation": [0, 1, 0, 0],
+          "scale": [40, 40, 40],
           "action": {
-            "type": "teleport",
+            "type": "changeRoom",
             "targetRoomId": "eingang"
           }
         }
@@ -86,11 +86,11 @@
         {
           "id": "back_to_eingang_from_innen",
           "text": "Zurück zum Eingang",
-          "position": [0, -5, -20],
-          "rotation": [0, 0, 0],
-          "scale": [10, 10, 10],
+          "translation": [-50, -20, 0],
+          "rotation": [0, 0, 0, 1],
+          "scale": [40, 40, 40],
           "action": {
-            "type": "teleport",
+            "type": "changeRoom",
             "targetRoomId": "eingang"
           }
         }

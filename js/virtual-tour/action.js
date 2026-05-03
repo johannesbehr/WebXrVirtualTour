@@ -6,10 +6,10 @@ export class Action {
   }
 }
 
-export class TeleportAction extends Action {
+export class ChangeRoomAction extends Action {
   constructor({ targetRoomId }) {
-    super("teleport");
-    if (!targetRoomId) throw new Error("Teleport braucht targetRoomId");
+    super("changeRoom");
+    if (!targetRoomId) throw new Error("Change Room braucht targetRoomId");
 
     this.targetRoomId = targetRoomId;
   }

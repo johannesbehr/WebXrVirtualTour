@@ -1,12 +1,12 @@
 // action-factory.js
 
-import { TeleportAction } from "./action.js";
+import { ChangeRoomAction } from "./action.js";
 
 export class ActionFactory {
   static create(data) {
     switch (data.type) {
-      case "teleport":
-        return new TeleportAction(data);
+      case "changeRoom":
+        return new ChangeRoomAction(data);
 
       default:
         throw new Error(`Unbekannter Action-Typ: ${data.type}`);

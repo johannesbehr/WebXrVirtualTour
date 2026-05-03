@@ -4,7 +4,9 @@ import {VirtualTour} from './virtual-tour.js';
 import {SkyboxNode} from './../render/nodes/skybox.js';
 import {WebXRButton} from './../util/webxr-button.js';
 import {InlineViewerHelper} from './../util/inline-viewer-helper.js';
-
+//import {Gltf2Node} from './../render/nodes/gltf2.js';
+import {HotspotNode} from './hotspot-node.js';
+	
 
 export class VirtualTourScene extends Scene {
 
@@ -21,17 +23,53 @@ export class VirtualTourScene extends Scene {
 	this.gl = null;
 	this.inlineViewerHelper = null;
 	this.xrImmersiveRefSpace = null;
+	this.enableStats(false);
 
-
-    if (!(tour instanceof VirtualTour)) {
-      throw new Error("VirtualTourScene erwartet eine Instanz von VirtualTour");
-    }
-
-    /**
+	this.hotspots = [];
+	
+	/**
      * Die zugrunde liegende Virtual Tour (Datenmodell)
      * @type {VirtualTour}
      */
-    this.tour = tour;
+	if(tour instanceof VirtualTour){
+		 this.tour = tour;
+	}
+	else {
+		console.log(typeof tour);
+      throw new Error("VirtualTourScene erwartet eine Instanz von VirtualTour!");
+    }
+
+	for(let i = 0; i< 5; i++){
+				//let hotspot = new Gltf2Node({url: 'media/gltf/hotspots/arrow2.glb'});
+		let hotspot = new HotspotNode(
+		{url:'media/gltf/hotspots/arrow2.glb',
+		callback:()=>this.hotspot_onClick(hotspot)});
+		this.hotspots.push(hotspot);
+/*
+		hotspot.rotation = [0,0.707,0,0.707 ];
+		hotspot.translation = [0, -10, 20];
+		hotspot.scale = [40, 40, 40];
+		this.addNode(hotspot);
+
+		let hotspot3 = new HotspotNode('media/gltf/hotspots/arrow2.glb',()=>this.hotspot_onClick());
+		hotspot3.rotation = [0,0.707,0,0.707 ];
+		hotspot3.translation = [0, -10, 10];
+		hotspot3.scale = [40, 40, 40];
+		this.addNode(hotspot3);
+		
+		//let hotspot = new Gltf2Node({url: 'media/gltf/hotspots/arrow2.glb'});
+		let hotspot2 = new HotspotNode('media/gltf/hotspots/arrow2.glb',()=>this.hotspot_onClick());
+		//hotspot2.rotation = [0,0.707,0,0.707 ];
+		hotspot2.translation = [0, -1, 20];
+		hotspot2.scale = [40, 40, 40];
+		this.addNode(hotspot2);
+
+		// 0: Schwebt in der Luft vor dem Auge
+		// -10: Ungefär auf dem Boden
+*/
+		
+	}
+
 
  
 	this.loadRoom(tour.startRoomId);
@@ -39,6 +77,13 @@ export class VirtualTourScene extends Scene {
 	console.log("Virtual Tour started.");
 	
   }
+  
+  static async create(tourUrl) {
+    const json = await fetch(tourUrl).then(r => r.json());
+	const tour = new VirtualTour(json);
+    return new VirtualTourScene(tour);
+  }
+  
   
   /* =========================
    Raum anzeigen
@@ -50,7 +95,29 @@ export class VirtualTourScene extends Scene {
 
 		let imgUrl = "tourdata/" + room.image;
 		this.changeSkybox(imgUrl);
-		// Debug-Ausgabe
+		
+		
+		
+		
+		
+		let i = 0;
+		room.hotspots.forEach(h => {
+			let hotspot = this.hotspots[i];
+			hotspot.rotation = h.rotation;
+			hotspot.translation = h.translation;
+			hotspot.scale = h.scale;
+			hotspot.action = h.action;
+
+			this.addNode(hotspot);
+			i++;
+		});
+
+		// Remove other hotspots from scene
+		for(;i<this.hotspots.length;i++){
+			this.removeNode(this.hotspots[i]);
+		}
+		
+		// Debug-Ausgabe		
 		console.log("Aktueller Raum:", room);
 	}
 
@@ -108,20 +175,14 @@ export class VirtualTourScene extends Scene {
 		
 		session.addEventListener('end',(e) => this.onSessionEnded(e));
 
-/*
-        session.addEventListener('selectstart',(e) =>  this.onSelectStart(e));
-        session.addEventListener('selectend',(e) =>  this.onSelectEnd(e));
-
-        // By listening for the 'select' event we can find out when the user has
-        // performed some sort of primary input action and respond to it.
-        session.addEventListener('select', onSelect);
-
-        session.addEventListener('squeezestart', onSqueezeStart);
-        session.addEventListener('squeezeend', onSqueezeEnd);
-        session.addEventListener('squeeze', onSqueeze);
-*/
 		
-
+		session.addEventListener('select', (ev) => {
+          let refSpace = ev.frame.session.isImmersive ?
+                           this.xrImmersiveRefSpace :
+                           this.inlineViewerHelper.referenceSpace;
+          this.handleSelect(ev.inputSource, ev.frame, refSpace);
+        });
+				
 		this.initGL();
 		this.inputRenderer.useProfileControllerMeshes(session);
 
@@ -185,7 +246,6 @@ export class VirtualTourScene extends Scene {
         }*/
 
 		 this.updateInputSources(frame, refSpace);
-
 		 this.drawViewArray(views);
 		}
 
@@ -206,6 +266,18 @@ export class VirtualTourScene extends Scene {
 		this.onResize();
 
 		this.setRenderer(new Renderer(this.gl));
+	}
+
+	hotspot_onClick(sender){
+		console.log("Hotspot clicked!");
+		let action = sender.action;
+		if(action){
+			if (action.type === "changeRoom") {
+				let nextRoom = sender.action.targetRoomId;
+				console.log("Next Room:", nextRoom);
+				this.loadRoom(nextRoom);
+			}
+		}
 	}
 	
 	onResize() {
