@@ -68,12 +68,12 @@
         {
           "id": "back_to_eingang_from_rechts",
           "text": "Zurück zum Eingang",
-          "translation": [-20, -10, -0],
-          "rotation": [0, 1, 0, 0],
+          "translation": [-7, -10, -14],
+          "rotation": [0, -50, 0],
           "scale": [40, 40, 40],
           "action": {
-            "type": "changeRoom",
-            "targetRoomId": "eingang"
+            "type": "script",
+            "script": "this.loadRoom('eingang');"
           }
         }
       ]
@@ -86,9 +86,9 @@
         {
           "id": "back_to_eingang_from_innen",
           "text": "Zurück zum Eingang",
-          "translation": [-50, -20, 0],
+          "translation": [-50, -20, -10],
           "rotation": [0, 0, 0, 1],
-          "scale": [40, 40, 40],
+          "scale": [80, 80, 80],
           "action": {
             "type": "changeRoom",
             "targetRoomId": "eingang"

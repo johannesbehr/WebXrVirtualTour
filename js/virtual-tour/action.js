@@ -14,3 +14,12 @@ export class ChangeRoomAction extends Action {
     this.targetRoomId = targetRoomId;
   }
 }
+
+export class ScriptAction extends Action {
+  constructor({ script }) {
+    super("script");
+    if (!script) throw new Error("Script braucht ein script");
+
+    this.script = script;
+  }
+}

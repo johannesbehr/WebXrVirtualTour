@@ -34,6 +34,14 @@
 import { VirtualTourScene } from './js/virtual-tour/virtual-tour-scene.js';
 let tourUrl = "./tourdata/hbs_rundgang.json"
 let scene = await VirtualTourScene.create(tourUrl);
+
+
+const roomId = new URLSearchParams(window.location.search).get('roomId');
+if (roomId !== null) {
+  scene.loadRoom(roomId);
+}
+
+
 scene.initXR();
 </script>
 

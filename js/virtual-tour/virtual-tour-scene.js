@@ -84,6 +84,35 @@ export class VirtualTourScene extends Scene {
     return new VirtualTourScene(tour);
   }
   
+  static convertRotation(inArray) {
+	  if(inArray.length==4){
+		  return inArray;
+	  }else if(inArray.length==3){
+		  const [xDeg, yDeg, zDeg] = inArray;
+
+		  // Grad → Radiant
+		  const x = xDeg * Math.PI / 180;
+		  const y = yDeg * Math.PI / 180;
+		  const z = zDeg * Math.PI / 180;
+
+		  const cx = Math.cos(x / 2);
+		  const sx = Math.sin(x / 2);
+		  const cy = Math.cos(y / 2);
+		  const sy = Math.sin(y / 2);
+		  const cz = Math.cos(z / 2);
+		  const sz = Math.sin(z / 2);
+
+		  const qw = cx * cy * cz + sx * sy * sz;
+		  const qx = sx * cy * cz - cx * sy * sz;
+		  const qy = cx * sy * cz + sx * cy * sz;
+		  const qz = cx * cy * sz - sx * sy * cz;
+
+		  return [qx, qy, qz, qw];
+	}else{
+			// invalid!
+	}
+  }
+  
   
   /* =========================
    Raum anzeigen
@@ -103,9 +132,9 @@ export class VirtualTourScene extends Scene {
 		let i = 0;
 		room.hotspots.forEach(h => {
 			let hotspot = this.hotspots[i];
-			hotspot.rotation = h.rotation;
+			hotspot.rotation = VirtualTourScene.convertRotation(h.rotation);
 			hotspot.translation = h.translation;
-			hotspot.scale = h.scale;
+			hotspot._originalScale = hotspot.scale = h.scale;
 			hotspot.action = h.action;
 
 			this.addNode(hotspot);
@@ -273,9 +302,12 @@ export class VirtualTourScene extends Scene {
 		let action = sender.action;
 		if(action){
 			if (action.type === "changeRoom") {
-				let nextRoom = sender.action.targetRoomId;
+				let nextRoom = action.targetRoomId;
 				console.log("Next Room:", nextRoom);
 				this.loadRoom(nextRoom);
+			}else if(action.type ==="script"){
+				const fn = new Function(action.script);
+				fn.call(this);
 			}
 		}
 	}

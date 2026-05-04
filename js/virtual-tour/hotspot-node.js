@@ -17,13 +17,14 @@ export class HotspotNode extends Gltf2Node {
 	
   onHoverStart() {
     this._hovered = true;
-	this.scale = [45, 45, 45];
+	this._originalScale = this.scale;
+	this.scale = this.scale.map(x => x * 1.1);
 	console.log("Hotspot hover start");
   }
 
   onHoverEnd() {
     this._hovered = false;
-	this.scale = [40, 40, 40];
+	this.scale = this._originalScale;
 	console.log("Hotspot hover end");
   }
 
