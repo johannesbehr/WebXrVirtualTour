@@ -6,13 +6,14 @@
       "id": "eingang",
       "title": "Eingang",
       "image": "images/eingang.jpg",
+	  "rotation" : [0 , 180 , 0],
       "hotspots": [
         
         {
           "id": "to_innen",
           "text": "Nach innen",
-          "translation": [0, -10, 20],
-          "rotation": [0, 0.707, 0, 0.707],
+          "translation": [0, -10, -20],
+          "rotation": [0, -90, 0],
           "scale": [40, 40, 40],
           "action": {
             "type": "changeRoom",
@@ -21,8 +22,8 @@
         },{
           "id": "to_links",
           "text": "Nach links",
-          "translation": [10, -10, 20],
-          "rotation": [0, 1, 0, 0],
+          "translation": [-10, -10, -20],
+          "rotation": [0, 0, 0],
           "scale": [40, 40, 40],
           "action": {
             "type": "changeRoom",
@@ -32,8 +33,8 @@
         {
           "id": "to_rechts",
           "text": "Nach rechts",
-          "translation": [-10, -10, 20],
-          "rotation": [0, 0, 0, 1],
+          "translation": [10, -10, -20],
+          "rotation": [0, 180, 0],
           "scale": [40, 40, 40],
           "action": {
             "type": "changeRoom",

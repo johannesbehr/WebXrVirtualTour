@@ -125,6 +125,7 @@ export class VirtualTourScene extends Scene {
 		let imgUrl = "tourdata/" + room.image;
 		this.changeSkybox(imgUrl);
 		
+		this.skybox.rotation = VirtualTourScene.convertRotation(room.rotation);
 		
 		
 		
