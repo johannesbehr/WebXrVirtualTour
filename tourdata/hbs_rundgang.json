@@ -16,8 +16,8 @@
           "rotation": [0, -90, 0],
           "scale": [40, 40, 40],
           "action": {
-            "type": "changeRoom",
-            "targetRoomId": "innen"
+            "type": "script",
+            "script":"this.loadRoom('innen');this.playSound('sounds/Gong.mp3');"
           }
         },{
           "id": "to_links",
@@ -94,7 +94,21 @@
             "type": "changeRoom",
             "targetRoomId": "eingang"
           }
+		}, 
+		  
+        {
+          "id": "gong",
+          "text": "Gong",
+          "translation": [0, -10, -20],
+          "rotation": [0, -90, 0],
+          "scale": [40, 40, 40],
+          "action": {
+            "type": "script",
+            "script": "this.playSound('sounds/Gong.mp3');"
+          }
         }
+		
+		
       ]
     }
   ]

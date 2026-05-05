@@ -71,7 +71,8 @@ export class VirtualTourScene extends Scene {
 	}
 
 
- 
+	this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+	this.soundCache = {};
 	this.loadRoom(tour.startRoomId);
 	
 	console.log("Virtual Tour started.");
@@ -113,6 +114,32 @@ export class VirtualTourScene extends Scene {
 	}
   }
   
+  
+async loadSound(url) {
+    if (this.soundCache[url]) return this.soundCache[url];
+
+    const res = await fetch(url);
+    const buf = await res.arrayBuffer();
+    const audioBuffer = await this.audioContext.decodeAudioData(buf);
+
+    this.soundCache[url] = audioBuffer;
+    return audioBuffer;
+}
+
+async playSound(url) {
+	
+	url = "tourdata/" +  url;
+    if (this.audioContext.state === "suspended") {
+        await this.audioContext.resume();
+    }
+
+    const buffer = await this.loadSound(url);
+
+    const source = this.audioContext.createBufferSource();
+    source.buffer = buffer;
+    source.connect(this.audioContext.destination);
+    source.start(0);
+}
   
   /* =========================
    Raum anzeigen
