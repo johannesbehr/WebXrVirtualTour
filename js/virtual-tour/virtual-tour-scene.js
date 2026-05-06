@@ -26,6 +26,11 @@ export class VirtualTourScene extends Scene {
 
 	this.hotspots = [];
 	
+	if(tour.url){
+		this.baseDir = tour.url.substring(0, tour.url.lastIndexOf("/") + 1);
+	}
+	
+	
 	/**
      * Die zugrunde liegende Virtual Tour (Datenmodell)
      * @type {VirtualTour}
@@ -61,7 +66,6 @@ export class VirtualTourScene extends Scene {
 	// Ich nutze die Klasse Gltf2Node zum darstellen von Pfeilen in einer virtuellen 360 Grad Tour. Die aktuelle implementierung hat den Nachteil, dass sie das Modell immer wieder neu läd. Ich möchte den gltf2-Loader cachen, so dass er wiederverwendet wird, wenn die gleiche Url angefordert wird. 
 	// Bitte erstelle mir dazu eine neue Klasse CachedGltf2Node, als Muster gebe ich dir hier die original Gltf2Node:
 	
-
 	this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
 	this.soundCache = {};
 	this.loadRoom(tour.startRoomId);
@@ -73,6 +77,8 @@ export class VirtualTourScene extends Scene {
   static async create(tourUrl) {
     const json = await fetch(tourUrl).then(r => r.json());
 	const tour = new VirtualTour(json);
+	tour.url = tourUrl;
+	
     return new VirtualTourScene(tour);
   }
   
@@ -118,7 +124,7 @@ async loadSound(url) {
 
 async playSound(url) {
 	
-	url = "tourdata/" +  url;
+	if(this.baseDir) url = this.baseDir +  url;
     if (this.audioContext.state === "suspended") {
         await this.audioContext.resume();
     }
@@ -140,8 +146,9 @@ async playSound(url) {
 		this.currentRoom = room;
 
 		// Set the new Skybox for the room
-		let imgUrl = "tourdata/" + room.image;
-		this.changeSkybox(imgUrl);
+		let url = room.image;
+		if(this.baseDir) url = this.baseDir +  url;
+		this.changeSkybox(url);
 		this.skybox.rotation = VirtualTourScene.convertRotation(room.rotation);
 		
 		// Remove old hotspotNodes
@@ -149,7 +156,7 @@ async playSound(url) {
 		
 		// Create new HotspotNodes to hotspots in room
 		room.hotspots.forEach(h => {
-			let hotspot = HotspotNode.create(h,()=>this.hotspot_onClick(h));
+			let hotspot = HotspotNode.create(h,()=>this.hotspot_onClick(h), this.baseDir);
 			this.addNode(hotspot);
 			this.hotspots.push(hotspot);
 		});
@@ -302,11 +309,19 @@ async playSound(url) {
 		window.addEventListener('resize', () => this.onResize());
 		this.onResize();
 
-		this.setRenderer(new Renderer(this.gl));
+		
+		let renderer = new Renderer(this.gl);
+		renderer.globalLightDir = [0.2, -1.0, 0.2];
+        renderer.globalLightColor = [7.0, 7.0, 8.0];
+		this.setRenderer(renderer);
+						
 	}
+		
+		
 
 	hotspot_onClick(sender){
 		console.log("Hotspot clicked!");
+		
 		let action = sender.action;
 		if(action){
 			if (action.type === "changeRoom") {

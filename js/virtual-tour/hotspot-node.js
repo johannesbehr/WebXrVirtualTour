@@ -42,7 +42,7 @@ export class HotspotNode extends CachedGltf2Node {
 	}
   }
 	
-  static create(hotspot, callback) {
+  static create(hotspot, callback, baseDir = null) {
 	  let url = 'media/gltf/hotspots/arrow2.glb';
 		
 		switch(hotspot.style){
@@ -51,6 +51,7 @@ export class HotspotNode extends CachedGltf2Node {
 			break;
 			case "custom":
 				url = hotspot.customModel;
+				if(baseDir) url = baseDir +  url;
 			break;
 			//case "arrow":
 			default:
@@ -62,6 +63,8 @@ export class HotspotNode extends CachedGltf2Node {
 		hotspotNode.translation = hotspot.translation;
 		hotspotNode._originalScale = hotspotNode.scale = hotspot.scale;
 		hotspotNode.action = hotspot.action;
+		hotspotNode.id = hotspot.id;
+		
     return hotspotNode;
   }
 	

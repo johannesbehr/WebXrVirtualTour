@@ -7,8 +7,7 @@
       "title": "Eingang",
       "image": "images/eingang.jpg",
 	  "rotation" : [0 , 180 , 0],
-      "hotspots": [
-        
+      "hotspots": [		
         {
           "id": "to_innen",
 		  "style" : "arrow",
