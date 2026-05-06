@@ -8,6 +8,7 @@ export class Hotspot {
     translation,
     rotation = [0, 0, 0, 1],
     scale = [1, 1, 1],
+	customModel = "",
 	style,
     action
   }) {
@@ -18,13 +19,16 @@ export class Hotspot {
     if (!action) {
       throw new Error(`Hotspot ${id} hat keine Action`);
     }
+	if (!action) {
+      throw new Error(`Hotspot ${id} hat keine Action`);
+    }
 
     this.id = id;
     this.text = text;
     this.translation = translation;
 	this.rotation = rotation;
     this.scale = scale;
-
+	this.customModel = customModel;
 
     this.style = style;
 

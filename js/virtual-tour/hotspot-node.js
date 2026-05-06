@@ -43,12 +43,14 @@ export class HotspotNode extends CachedGltf2Node {
   }
 	
   static create(hotspot, callback) {
-	  
-		let url = 'media/gltf/hotspots/arrow2.glb';
+	  let url = 'media/gltf/hotspots/arrow2.glb';
 		
 		switch(hotspot.style){
 			case "ring":
 				url = 'media/gltf/hotspots/ring.glb';
+			break;
+			case "custom":
+				url = hotspot.customModel;
 			break;
 			//case "arrow":
 			default:
