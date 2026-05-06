@@ -1,11 +1,10 @@
 {
   "title": "Virtueller Rundgang Heinrich-Büssing-Schule",
-  "startRoomId": "eingang",
+  "startRoomId": "Haupteingang",
   "rooms": [
-    {
-      "id": "eingang",
+    { "id": "Haupteingang",
       "title": "Eingang",
-      "image": "images/eingang.jpg",
+      "image": "images/image-JrkFBmS7_Haupteingang.jpg",
 	  "rotation" : [0 , 180 , 0],
       "hotspots": [		
         {
@@ -17,7 +16,7 @@
           "scale": [40, 40, 40],
           "action": {
             "type": "script",
-            "script":"this.loadRoom('innen');this.playSound('sounds/Gong.mp3');"
+            "script":"this.loadRoom('innen1');this.playSound('sounds/Gong.mp3');"
           }
         },{
           "id": "to_links",
@@ -45,10 +44,57 @@
         }
       ]
     },
-    {
-      "id": "links",
+    { "id": "innen1",
+      "title": "Pausenhalle1_B",
+      "image": "images/image-MJnuIS1e_Pausenhalle1_B.jpg",
+	  "rotation" : [0 , 130 , 0],
+      "hotspots": [
+        {
+          "id": "back_to_eingang_from_innen",
+		  "style" : "arrow",
+          "text": "Zurück zum Eingang",
+          "translation": [0, -20, 80],
+          "rotation": [0, 90, 0],
+          "scale": [120, 120, 120],
+          "action": {
+            "type": "changeRoom",
+            "targetRoomId": "Haupteingang"
+          }
+		}, 
+		        {
+          "id": "back_to_eingang_from_innen",
+		  "style" : "arrow",
+          "text": "Zurück zum Eingang",
+          "translation": [-10, -15, -300],
+          "rotation": [-70, 180, 30],
+          "scale": [220, 220, 220],
+          "action": {
+            "type": "changeRoom",
+            "targetRoomId": "innen"
+          }
+		}, 
+		
+
+		  
+        {
+          "id": "gong",
+		  "style" : "ring",
+          "text": "Gong",
+          "translation": [0, -10, -20],
+          "rotation": [0, -90, 0],
+          "scale": [40, 40, 40],
+          "action": {
+            "type": "script",
+            "script": "this.playSound('sounds/Gong.mp3');"
+          }
+        }
+		
+		
+      ]
+    },
+    { "id": "links",
       "title": "Links",
-      "image": "images/links.jpg",
+      "image": "images/image-kDXaoElF_vor_Helene.jpg",
       "hotspots": [
         {
           "id": "back_to_eingang_from_links",
@@ -64,10 +110,9 @@
         }
       ]
     },
-    {
-      "id": "rechts",
+    { "id": "rechts",
       "title": "Rechts",
-      "image": "images/rechts.jpg",
+      "image": "images/image-eOYD3L2p_Seite.jpg",
       "hotspots": [
         {
           "id": "back_to_eingang_from_rechts",
@@ -83,24 +128,24 @@
         }
       ]
     },
-    {
-      "id": "innen",
-      "title": "Innen",
-      "image": "images/innen.jpg",
+    { "id": "innen",
+      "title": "Pausenhalle2_B",
+      "image": "images/image-DoPScfLl_Pausenhalle2_B.jpg",
+	  "rotation" : [-3 , 90 , 0],
       "hotspots": [
-        {
-          "id": "back_to_eingang_from_innen",
-		  "style" : "arrow",
-          "text": "Zurück zum Eingang",
-          "translation": [-50, -20, -10],
-          "rotation": [0, 0, 0, 1],
-          "scale": [80, 80, 80],
+
+		  				        {
+         "id": "back_to_pausenhalle1_from_treppe",
+		  "style" : "ring",
+          "text": "Gong",
+          "translation": [-18, -20, 80],
+          "rotation": [0, 0, 0],
+          "scale": [150, 150, 150],
           "action": {
             "type": "changeRoom",
-            "targetRoomId": "eingang"
+             "targetRoomId": "innen1"
           }
 		}, 
-		  
         {
           "id": "gong",
 		  "style" : "ring",
