@@ -42,7 +42,8 @@ export class VirtualTourScene extends Scene {
 	for(let i = 0; i< 5; i++){
 				//let hotspot = new Gltf2Node({url: 'media/gltf/hotspots/arrow2.glb'});
 		let hotspot = new HotspotNode(
-		{url:'media/gltf/hotspots/arrow2.glb',
+		//{url:'media/gltf/hotspots/arrow2.glb',
+		{url:'media/gltf/hotspots/ring.glb',
 		callback:()=>this.hotspot_onClick(hotspot)});
 		this.hotspots.push(hotspot);
 /*
