@@ -4,7 +4,6 @@ import {VirtualTour} from './virtual-tour.js';
 import {SkyboxNode} from './../render/nodes/skybox.js';
 import {WebXRButton} from './../util/webxr-button.js';
 import {InlineViewerHelper} from './../util/inline-viewer-helper.js';
-//import {Gltf2Node} from './../render/nodes/gltf2.js';
 import {HotspotNode} from './hotspot-node.js';
 	
 
@@ -39,6 +38,7 @@ export class VirtualTourScene extends Scene {
       throw new Error("VirtualTourScene erwartet eine Instanz von VirtualTour!");
     }
 
+/*
 	for(let i = 0; i< 5; i++){
 				//let hotspot = new Gltf2Node({url: 'media/gltf/hotspots/arrow2.glb'});
 		let hotspot = new HotspotNode(
@@ -46,31 +46,21 @@ export class VirtualTourScene extends Scene {
 		{url:'media/gltf/hotspots/ring.glb',
 		callback:()=>this.hotspot_onClick(hotspot)});
 		this.hotspots.push(hotspot);
-/*
-		hotspot.rotation = [0,0.707,0,0.707 ];
-		hotspot.translation = [0, -10, 20];
-		hotspot.scale = [40, 40, 40];
-		this.addNode(hotspot);
-
-		let hotspot3 = new HotspotNode('media/gltf/hotspots/arrow2.glb',()=>this.hotspot_onClick());
-		hotspot3.rotation = [0,0.707,0,0.707 ];
-		hotspot3.translation = [0, -10, 10];
-		hotspot3.scale = [40, 40, 40];
-		this.addNode(hotspot3);
-		
-		//let hotspot = new Gltf2Node({url: 'media/gltf/hotspots/arrow2.glb'});
-		let hotspot2 = new HotspotNode('media/gltf/hotspots/arrow2.glb',()=>this.hotspot_onClick());
-		//hotspot2.rotation = [0,0.707,0,0.707 ];
-		hotspot2.translation = [0, -1, 20];
-		hotspot2.scale = [40, 40, 40];
-		this.addNode(hotspot2);
-
-		// 0: Schwebt in der Luft vor dem Auge
-		// -10: Ungefär auf dem Boden
-*/
-		
 	}
-
+*/
+	// Hotspot Pool
+	// - release => back to pool
+	// - request(style) => get one from Pool. All proberties will be set to default!
+	
+	// Alternativ: den Loader irgenwie cachen?
+	// Verbesserte Version des Gltf2Node der den Loader recycled.
+	// Problem: Gltf2Node nutzt jedes Mal einen neuen Loader und läd ein häufig benötigtes Objekt immer wieder.
+	// Ziel ist es, diesen Teil zu cachen oder wiederzuverwenden, damit wenn häufig ein gleiches Objekt erstellt wird, an dieser Stelle keine Redundanz besteht.
+	//Denkbar wäre z.B. eine Art cache, die sich die urls merkt und bei gleicher url den Loader wiederverwendet.
+	
+	// Ich nutze die Klasse Gltf2Node zum darstellen von Pfeilen in einer virtuellen 360 Grad Tour. Die aktuelle implementierung hat den Nachteil, dass sie das Modell immer wieder neu läd. Ich möchte den gltf2-Loader cachen, so dass er wiederverwendet wird, wenn die gleiche Url angefordert wird. 
+	// Bitte erstelle mir dazu eine neue Klasse CachedGltf2Node, als Muster gebe ich dir hier die original Gltf2Node:
+	
 
 	this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
 	this.soundCache = {};
@@ -115,7 +105,6 @@ export class VirtualTourScene extends Scene {
 	}
   }
   
-  
 async loadSound(url) {
     if (this.soundCache[url]) return this.soundCache[url];
 
@@ -150,31 +139,21 @@ async playSound(url) {
 		const room = this.tour.getRoom(roomId);
 		this.currentRoom = room;
 
+		// Set the new Skybox for the room
 		let imgUrl = "tourdata/" + room.image;
 		this.changeSkybox(imgUrl);
-		
 		this.skybox.rotation = VirtualTourScene.convertRotation(room.rotation);
 		
+		// Remove old hotspotNodes
+		this.hotspots.forEach(h => { this.removeNode(h);});
 		
-		
-		
-		let i = 0;
+		// Create new HotspotNodes to hotspots in room
 		room.hotspots.forEach(h => {
-			let hotspot = this.hotspots[i];
-			hotspot.rotation = VirtualTourScene.convertRotation(h.rotation);
-			hotspot.translation = h.translation;
-			hotspot._originalScale = hotspot.scale = h.scale;
-			hotspot.action = h.action;
-
+			let hotspot = HotspotNode.create(h,()=>this.hotspot_onClick(h));
 			this.addNode(hotspot);
-			i++;
+			this.hotspots.push(hotspot);
 		});
 
-		// Remove other hotspots from scene
-		for(;i<this.hotspots.length;i++){
-			this.removeNode(this.hotspots[i]);
-		}
-		
 		// Debug-Ausgabe		
 		console.log("Aktueller Raum:", room);
 	}

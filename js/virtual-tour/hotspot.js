@@ -1,7 +1,5 @@
 // hotspot.js
-import { Vec3 } from "./vec3.js";
-import { Quaternion } from "./quaternion.js";
-import { ActionFactory } from "./action-factory.js";
+import { Action } from "./action.js";
 
 export class Hotspot {
   constructor({
@@ -10,7 +8,7 @@ export class Hotspot {
     translation,
     rotation = [0, 0, 0, 1],
     scale = [1, 1, 1],
-    type = "generic",
+	style,
     action
   }) {
     if (!id) throw new Error("Hotspot braucht eine ID");
@@ -23,27 +21,13 @@ export class Hotspot {
 
     this.id = id;
     this.text = text;
-
-	/*
-    this.position = new Vec3(position);
-	if(Array.isArray(rotation)){
-		if(rotation.length==3){
-			this.rotation = new Vec3(rotation);
-		}else if(rotation.length==4){
-			this.rotation = new Quaternion(rotation);
-		}
-	} else{
-		// Throw up	
-	}
-    this.scale = new Vec3(scale);
-*/
     this.translation = translation;
 	this.rotation = rotation;
     this.scale = scale;
 
 
-    this.type = type;
+    this.style = style;
 
-    this.action = ActionFactory.create(action);
+    this.action = Action.create(action);
   }
 }

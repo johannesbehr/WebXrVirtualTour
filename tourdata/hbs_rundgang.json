@@ -11,6 +11,7 @@
         
         {
           "id": "to_innen",
+		  "style" : "arrow",
           "text": "Nach innen",
           "translation": [0, -10, -20],
           "rotation": [0, -90, 0],
@@ -21,6 +22,7 @@
           }
         },{
           "id": "to_links",
+		  "style" : "arrow",
           "text": "Nach links",
           "translation": [-10, -10, -20],
           "rotation": [0, 0, 0],
@@ -32,6 +34,7 @@
         },
         {
           "id": "to_rechts",
+		  "style" : "arrow",
           "text": "Nach rechts",
           "translation": [10, -10, -20],
           "rotation": [0, 180, 0],
@@ -50,6 +53,7 @@
       "hotspots": [
         {
           "id": "back_to_eingang_from_links",
+		  "style" : "arrow",
           "text": "Zurück zum Eingang",
           "translation": [0, -10, 20],
           "rotation": [0, 0.707, 0, 0.707],
@@ -68,6 +72,7 @@
       "hotspots": [
         {
           "id": "back_to_eingang_from_rechts",
+		  "style" : "arrow",
           "text": "Zurück zum Eingang",
           "translation": [-7, -10, -14],
           "rotation": [0, -50, 0],
@@ -86,6 +91,7 @@
       "hotspots": [
         {
           "id": "back_to_eingang_from_innen",
+		  "style" : "arrow",
           "text": "Zurück zum Eingang",
           "translation": [-50, -20, -10],
           "rotation": [0, 0, 0, 1],
@@ -98,6 +104,7 @@
 		  
         {
           "id": "gong",
+		  "style" : "ring",
           "text": "Gong",
           "translation": [0, -10, -20],
           "rotation": [0, -90, 0],

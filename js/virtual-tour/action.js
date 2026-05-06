@@ -4,6 +4,17 @@ export class Action {
   constructor(type) {
     this.type = type;
   }
+  
+  static create(data) {
+    switch (data.type) {
+      case "changeRoom":
+        return new ChangeRoomAction(data);
+	 case "script":
+        return new ScriptAction(data);
+      default:
+        throw new Error(`Unbekannter Action-Typ: ${data.type}`);
+    }
+  }
 }
 
 export class ChangeRoomAction extends Action {
