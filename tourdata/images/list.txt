@@ -1,0 +1,64 @@
+ Volume in Laufwerk C: hat keine Bezeichnung.
+ Volumeseriennummer: 0AEB-3480
+
+ Verzeichnis von C:\xampp\htdocs\WebXrVirtualTour\tourdata\images
+
+07.05.2026  14:09    <DIR>          .
+07.05.2026  14:07    <DIR>          ..
+06.05.2026  21:41         2.908.685 file-1PoVw5nLwvj8FG-7-yppLHKfn-0H4Dc2a3-pY7fSVlI-8jL8LneT-Sy5lfe9w.jpg
+06.05.2026  21:42         3.359.678 file-2l0mKiBY.jpg
+06.05.2026  21:42         2.739.748 file-eIwHUJXp.jpg
+06.05.2026  21:43         3.316.979 file-MIsr54eBIK4Mi_MW-fFPGBseF-IbBDxPrp-dFHYXDn3-oe3Io5Fg-pCyeU2BI.jpg
+06.05.2026  21:43         3.056.909 file-REtxLP0hkB_orYn4-LSjID1iO-XHEIl0NX-rw70kCLi-UaHIk27U-F5k1HM8Z.jpg
+06.05.2026  21:43         3.239.977 file-T78kD6Ea.jpg
+07.05.2026  14:07         3.387.004 file-u8NSafW7_Flur_F.jpg
+07.05.2026  14:07         3.123.516 image-0h19PEl3_Flur_C1.jpg
+07.05.2026  14:07           511.958 image-14fmhWux_Flur_F.jpg
+07.05.2026  14:07           538.970 image-17sVNYjp_Vor_Helene1.jpg
+07.05.2026  14:07           344.685 image-2XvAwtc0_Flur_F109.jpg
+07.05.2026  14:07           974.824 image-35dZNoYe_Eingang_E3.jpg
+27.04.2026  10:56           501.675 image-5svEiPyB.jpg
+07.05.2026  14:07           731.916 image-75A8HCr5_Cafeteria.jpg
+07.05.2026  14:07           362.262 image-86wjgZAE_Flur_C3.jpg
+07.05.2026  14:07           529.756 image-9lJPG5RR_Gang_C_zu_D.jpg
+07.05.2026  14:07           570.532 image-bv0jUph8_Flur_F0.jpg
+07.05.2026  14:07           527.583 image-CiBxxWkg_Flur_F3.jpg
+07.05.2026  14:07           490.057 image-cpdD25iB_Flur_D2.jpg
+07.05.2026  14:07           592.427 image-De6N3FkT_Flur_C2.jpg
+07.05.2026  14:07           367.214 image-dIlaynrZ_Flur_C2.jpg
+07.05.2026  14:07           411.188 image-Domx3ZB2_Flur_D1.jpg
+07.05.2026  14:07         6.067.725 image-DoPScfLl_Pausenhalle2_B.jpg
+27.04.2026  11:16           731.918 image-eOYD3L2p_Seite.jpg
+07.05.2026  14:07           458.423 image-hi8AwDhS_F006.jpg
+07.05.2026  14:07           355.710 image-InVR13lY_Flur_F2.jpg
+27.04.2026  10:55           536.470 image-isE6CYyE.jpg
+07.05.2026  14:07           594.840 image-joe166jj_Flur_C2.jpg
+07.05.2026  14:07         7.656.864 image-JrkFBmS7_Haupteingang.jpg
+06.05.2026  21:47         2.717.225 image-JZ9R9v84.jpg
+07.05.2026  14:07           366.425 image-K4VRU2nO_Flur_F3.jpg
+27.04.2026  10:55           473.615 image-k8gea8MR.jpg
+27.04.2026  11:16           805.903 image-kDXaoElF_vor_Helene.jpg
+07.05.2026  14:07           488.179 image-KgXimbX7_Flur_F116.jpg
+07.05.2026  14:07           578.268 image-L7HXRBbR_Flur_F214.jpg
+07.05.2026  14:07           502.193 image-m0rlSVwo_Pausenhalle3_B.jpg
+07.05.2026  14:07           543.991 image-MhN5pkfn_Flur_C3.jpg
+07.05.2026  14:07         6.013.325 image-MJnuIS1e_Pausenhalle1_B.jpg
+27.04.2026  11:15         1.024.171 image-MKp2V1Hr.jpg
+06.05.2026  21:49         5.436.904 image-Mu0TkEGZ.jpg
+06.05.2026  21:49           542.550 image-OucFXStC.jpg
+06.05.2026  21:49         5.595.195 image-pZBUniNm.jpg
+27.04.2026  11:07           587.952 image-tya44N2A.jpg
+06.05.2026  21:49         6.194.492 image-UGef1JyX.jpg
+07.05.2026  14:07           597.106 image-uvFRJBS6_D212.jpg
+06.05.2026  21:49         5.303.008 image-UvteP7YL.jpg
+27.04.2026  11:02           585.430 image-uVU5UNcx.jpg
+27.04.2026  11:07           514.472 image-VP5yuyh4.jpg
+06.05.2026  21:50           519.730 image-VTn5Xt2n.jpg
+27.04.2026  11:01           579.602 image-WuUMgVWo.jpg
+27.04.2026  11:07           491.536 image-XxpSLB2p.jpg
+06.05.2026  21:50           644.728 image-YhTfd9O7.jpg
+27.04.2026  10:55           430.560 image-YxEZfvA5.jpg
+27.04.2026  11:02           551.282 image-ZNR61tPW.jpg
+07.05.2026  14:09                 0 list.txt
+              55 Datei(en),     91.077.335 Bytes
+               2 Verzeichnis(se), 294.828.957.696 Bytes frei

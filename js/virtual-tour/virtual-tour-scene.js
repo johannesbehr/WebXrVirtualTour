@@ -5,7 +5,7 @@ import {SkyboxNode} from './../render/nodes/skybox.js';
 import {WebXRButton} from './../util/webxr-button.js';
 import {InlineViewerHelper} from './../util/inline-viewer-helper.js';
 import {HotspotNode} from './hotspot-node.js';
-	
+import {SignNode} from './signe-node.js';
 
 export class VirtualTourScene extends Scene {
 
@@ -23,6 +23,8 @@ export class VirtualTourScene extends Scene {
 	this.inlineViewerHelper = null;
 	this.xrImmersiveRefSpace = null;
 	this.enableStats(false);
+	
+	this.sign = null;
 
 	this.hotspots = [];
 	
@@ -68,6 +70,8 @@ export class VirtualTourScene extends Scene {
 	
 	this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
 	this.soundCache = {};
+	
+	
 	this.loadRoom(tour.startRoomId);
 	
 	console.log("Virtual Tour started.");
@@ -151,8 +155,9 @@ async playSound(url) {
 		this.changeSkybox(url);
 		this.skybox.rotation = VirtualTourScene.convertRotation(room.rotation);
 		
-		// Remove old hotspotNodes
+		// Remove all old hotspotNodes
 		this.hotspots.forEach(h => { this.removeNode(h);});
+		this.hotspots = [];
 		
 		// Create new HotspotNodes to hotspots in room
 		room.hotspots.forEach(h => {
@@ -160,6 +165,12 @@ async playSound(url) {
 			this.addNode(hotspot);
 			this.hotspots.push(hotspot);
 		});
+
+
+		this.removeNode(this.sign);
+		this.sign = new SignNode(room.title);
+		this.sign.translation = [0, 0, -2];
+		this.addNode(this.sign);
 
 		// Debug-Ausgabe		
 		console.log("Aktueller Raum:", room);
@@ -249,6 +260,8 @@ async playSound(url) {
 		 }
 		 session.requestAnimationFrame((time, frame) => this.onXRFrame(time,frame));
 		});
+		
+		
 	}
 
 	onXRFrame(time, frame) {
@@ -316,8 +329,6 @@ async playSound(url) {
 		this.setRenderer(renderer);
 						
 	}
-		
-		
 
 	hotspot_onClick(sender){
 		console.log("Hotspot clicked!");
