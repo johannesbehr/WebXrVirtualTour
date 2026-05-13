@@ -35,7 +35,7 @@
 		  "style" : "arrow",
           "text": "Nach rechts",
           "translation": [10, -10, -20],
-          "rotation": [0, 180, 0],
+          "rotation": [0, 0, 180],
           "scale": [40, 40, 40],
           "action": {
             "type": "changeRoom",

@@ -5,7 +5,7 @@ import {SkyboxNode} from './../render/nodes/skybox.js';
 import {WebXRButton} from './../util/webxr-button.js';
 import {InlineViewerHelper} from './../util/inline-viewer-helper.js';
 import {HotspotNode} from './hotspot-node.js';
-import {SignNode} from './signe-node.js';
+import {SignNode} from './sign-node.js';
 
 export class VirtualTourScene extends Scene {
 
@@ -290,17 +290,6 @@ async playSound(url) {
 			renderView.eye = view.eye
 			views.push(renderView);
 		 }
-
-		/*
-		// Update the matrix for each box
-        for (let box of boxes) {
-          let node = box.node;
-          mat4.identity(node.matrix);
-          //mat4.translate(node.matrix, node.matrix, box.position);
-          //mat4.rotateX(node.matrix, node.matrix, time/1000);
-          //mat4.rotateY(node.matrix, node.matrix, time/1500);
-          mat4.scale(node.matrix, node.matrix, box.scale);
-        }*/
 
 		 this.updateInputSources(frame, refSpace);
 		 this.drawViewArray(views);

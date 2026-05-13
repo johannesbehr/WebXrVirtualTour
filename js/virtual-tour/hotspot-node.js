@@ -1,4 +1,6 @@
 import {CachedGltf2Node} from './cached-gltf2-node.js';
+import {SignNode} from './sign-node.js';
+
 
 export class HotspotNode extends CachedGltf2Node {
 	constructor(options){
@@ -10,6 +12,12 @@ export class HotspotNode extends CachedGltf2Node {
 		this.action = options.action;
 		this._hovered = false;
 		this._hoverT = 0;
+		this._originalScale = [1, 1, 1];
+		this.text = options.text || null;
+		this._signNode = null;
+		if (this.text) {
+			this._createSignNode();
+		}
 		console.log("Hotspot created!");
 	}
 	
@@ -42,9 +50,9 @@ export class HotspotNode extends CachedGltf2Node {
 	}
   }
 	
-  static create(hotspot, callback, baseDir = null) {
-	  let url = 'media/gltf/hotspots/arrow2.glb';
-		
+	static create(hotspot, callback, baseDir = null) {
+		let url = 'media/gltf/hotspots/arrow2.glb';
+
 		switch(hotspot.style){
 			case "ring":
 				url = 'media/gltf/hotspots/ring.glb';
@@ -57,28 +65,80 @@ export class HotspotNode extends CachedGltf2Node {
 			default:
 			break;
 		}
-	  
-		let hotspotNode = new HotspotNode({url:url,callback:callback});
+
+		let hotspotNode = new HotspotNode({url:url,callback:callback, action:hotspot.action, text:hotspot.text});
 		hotspotNode.rotation = HotspotNode.convertRotation(hotspot.rotation);
 		hotspotNode.translation = hotspot.translation;
 		hotspotNode._originalScale = hotspotNode.scale = hotspot.scale;
-		hotspotNode.action = hotspot.action;
+		//hotspotNode.action = hotspot.action;
 		hotspotNode.id = hotspot.id;
-		
-    return hotspotNode;
-  }
+
+		return hotspotNode;
+	}
 	
+	_createSignNode() {
+		this._signNode = new SignNode(this.text, {
+		  fontSize: 64,
+		  background: 'rgba(0,0,0,0.75)',
+		  color: 'white',
+		  padding: 20
+		});
+
+		// Initial unsichtbar
+		this._signNode.visible = false;
+
+		// Position relativ zum Hotspot:
+		// 1.6 m Augenhöhe + etwas Abstand nach oben
+		this._signNode.translation = [0, 0.1, 0];
+
+		// Optional etwas kleiner skalieren
+		this._signNode.scale = [1, 1, 1];
+
+		// Als Kind hinzufügen, damit es sich mit dem Hotspot bewegt
+		this.addNode(this._signNode);
+  }
+  
+	 set rotation(value) {
+	  // 1. Originalverhalten behalten
+	  super.rotation = value;
+
+	  if (this._signNode && value) {
+
+		// Quaternion: [x, y, z, w]
+		const x = value[0];
+		const y = value[1];
+		const z = value[2];
+		const w = value[3];
+
+		// inverse rotation
+		const inv = [-x, -y, -z, w];
+
+		this._signNode.rotation = inv;
+	  }
+	}
+  
 	
   onHoverStart() {
     this._hovered = true;
 	this._originalScale = this.scale;
 	this.scale = this.scale.map(x => x * 1.1);
+	
+	if (this._signNode) {
+      this._signNode.visible = true;
+    }
+	
 	console.log("Hotspot hover start");
   }
 
   onHoverEnd() {
     this._hovered = false;
 	this.scale = this._originalScale;
+
+	if (this._signNode) {
+      this._signNode.visible = false;
+    }
+
+
 	console.log("Hotspot hover end");
   }
 

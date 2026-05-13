@@ -85,8 +85,6 @@ export class SignNode extends Node {
 
     this._createCanvasTexture();
     this._createQuad(renderer);
-	
-	console.log(this._renderPrimitive);
   }
 
   // -------------------------------------------------------
@@ -189,6 +187,17 @@ export class SignNode extends Node {
     }
   }
 
+	updateBillboard(cameraPosition) {
+	//if (!this.billboard) return;
+
+	  const dx = cameraPosition[0] - this.translation[0];
+	  const dz = cameraPosition[2] - this.translation[2];
+
+	  const angle = Math.atan2(dx, dz);
+	  this.rotation = this.convertRotation([0, angle, 0]);
+	}
+
+
   // -------------------------------------------------------
   // Utils
   // -------------------------------------------------------
@@ -205,4 +214,29 @@ export class SignNode extends Node {
     ctx.quadraticCurveTo(x, y, x + r, y);
     ctx.closePath();
   }
+  
+  	convertRotation(inArray) {
+	  if(inArray.length==4){
+		  return inArray;
+	  }else if(inArray.length==3){
+		  const [x, y, z] = inArray;
+
+		  const cx = Math.cos(x / 2);
+		  const sx = Math.sin(x / 2);
+		  const cy = Math.cos(y / 2);
+		  const sy = Math.sin(y / 2);
+		  const cz = Math.cos(z / 2);
+		  const sz = Math.sin(z / 2);
+
+		  const qw = cx * cy * cz + sx * sy * sz;
+		  const qx = sx * cy * cz - cx * sy * sz;
+		  const qy = cx * sy * cz + sx * cy * sz;
+		  const qz = cx * cy * sz - sx * sy * cz;
+
+		  return [qx, qy, qz, qw];
+	}else{
+			// invalid!
+	}
+  }
+  
 }
