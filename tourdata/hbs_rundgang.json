@@ -3,14 +3,14 @@
   "startRoomId": "Haupteingang",
   "rooms": [
     { "id": "Haupteingang",
-      "title": "Eingang",
+      "title": "Haupteingang",
       "image": "images/image-JrkFBmS7_Haupteingang.jpg",
 	  "rotation" : [0 , 180 , 0],
       "hotspots": [		
         {
           "id": "to_innen",
 		  "style" : "arrow",
-          "text": "Nach innen",
+          "text": "Pausenhalle betreten",
           "translation": [0, -10, -20],
           "rotation": [0, -90, 0],
           "scale": [40, 40, 40],
@@ -45,14 +45,14 @@
       ]
     },
     { "id": "innen1",
-      "title": "Pausenhalle1_B",
+      "title": "Pausenhalle Gebäude B",
       "image": "images/image-MJnuIS1e_Pausenhalle1_B.jpg",
 	  "rotation" : [0 , 130 , 0],
       "hotspots": [
         {
           "id": "back_to_eingang_from_innen",
 		  "style" : "arrow",
-          "text": "Zurück zum Eingang",
+          "text": "Pausenhalle verlassen",
           "translation": [0, -20, 80],
           "rotation": [0, 90, 0],
           "scale": [120, 120, 120],
@@ -93,13 +93,13 @@
       ]
     },
     { "id": "links",
-      "title": "Links",
+      "title": "Zwischen Gebäude G, F und der Helene-Engelbrecht-Schule",
       "image": "images/image-kDXaoElF_vor_Helene.jpg",
       "hotspots": [
         {
           "id": "back_to_eingang_from_links",
 		  "style" : "arrow",
-          "text": "Zurück zum Eingang",
+          "text": "Zurück zum Haupteingang",
           "translation": [0, -10, 20],
           "rotation": [0, 0.707, 0, 0.707],
           "scale": [40, 40, 40],
@@ -111,13 +111,13 @@
       ]
     },
     { "id": "rechts",
-      "title": "Rechts",
+      "title": "Vor Gebäude A",
       "image": "images/image-eOYD3L2p_Seite.jpg",
       "hotspots": [
         {
           "id": "back_to_eingang_from_rechts",
 		  "style" : "arrow",
-          "text": "Zurück zum Eingang",
+          "text": "Zurück zum Haupteingang",
           "translation": [-7, -10, -14],
           "rotation": [0, -50, 0],
           "scale": [40, 40, 40],
@@ -129,7 +129,7 @@
       ]
     },
     { "id": "innen",
-      "title": "Pausenhalle2_B",
+      "title": "Pausenhalle Gebäude B, auf der Treppe",
       "image": "images/image-DoPScfLl_Pausenhalle2_B.jpg",
 	  "rotation" : [-3 , 90 , 0],
       "hotspots": [
@@ -137,7 +137,6 @@
 		  				        {
          "id": "back_to_pausenhalle1_from_treppe",
 		  "style" : "ring",
-          "text": "Gong",
           "translation": [-18, -20, 80],
           "rotation": [0, 0, 0],
           "scale": [150, 150, 150],
