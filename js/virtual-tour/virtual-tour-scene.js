@@ -6,6 +6,8 @@ import {WebXRButton} from './../util/webxr-button.js';
 import {InlineViewerHelper} from './../util/inline-viewer-helper.js';
 import {HotspotNode} from './hotspot-node.js';
 import {SignNode} from './sign-node.js';
+import {Util} from './util.js'
+
 
 export class VirtualTourScene extends Scene {
 
@@ -85,36 +87,7 @@ export class VirtualTourScene extends Scene {
 	
     return new VirtualTourScene(tour);
   }
-  
-  static convertRotation(inArray) {
-	  if(inArray.length==4){
-		  return inArray;
-	  }else if(inArray.length==3){
-		  const [xDeg, yDeg, zDeg] = inArray;
-
-		  // Grad → Radiant
-		  const x = xDeg * Math.PI / 180;
-		  const y = yDeg * Math.PI / 180;
-		  const z = zDeg * Math.PI / 180;
-
-		  const cx = Math.cos(x / 2);
-		  const sx = Math.sin(x / 2);
-		  const cy = Math.cos(y / 2);
-		  const sy = Math.sin(y / 2);
-		  const cz = Math.cos(z / 2);
-		  const sz = Math.sin(z / 2);
-
-		  const qw = cx * cy * cz + sx * sy * sz;
-		  const qx = sx * cy * cz - cx * sy * sz;
-		  const qy = cx * sy * cz + sx * cy * sz;
-		  const qz = cx * cy * sz - sx * sy * cz;
-
-		  return [qx, qy, qz, qw];
-	}else{
-			// invalid!
-	}
-  }
-  
+    
 async loadSound(url) {
     if (this.soundCache[url]) return this.soundCache[url];
 
@@ -153,7 +126,7 @@ async playSound(url) {
 		let url = room.image;
 		if(this.baseDir) url = this.baseDir +  url;
 		this.changeSkybox(url);
-		this.skybox.rotation = VirtualTourScene.convertRotation(room.rotation);
+		this.skybox.rotation = Util.convertRotation(room.rotation);
 		
 		// Remove all old hotspotNodes
 		this.hotspots.forEach(h => { this.removeNode(h);});

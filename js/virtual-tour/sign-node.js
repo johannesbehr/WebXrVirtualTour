@@ -3,6 +3,7 @@ import { QuadNode } from "./../render/nodes/quad-texture.js";
 import { UrlTexture } from "./../render/core/texture.js";
 import { Material } from "./../render/core/material.js";
 import { PrimitiveStream } from "./../render/geometry/primitive-stream.js";
+import { Util } from './util.js'
 
 /**
  * Material für dynamische Canvas-Texturen
@@ -112,7 +113,7 @@ export class SignNode extends Node {
 
   // background
   ctx.fillStyle = opt.background;
-  this._roundRect(
+  Util.roundRect(
     ctx,
     0,
     0,
@@ -194,49 +195,13 @@ export class SignNode extends Node {
 	  const dz = cameraPosition[2] - this.translation[2];
 
 	  const angle = Math.atan2(dx, dz);
-	  this.rotation = this.convertRotation([0, angle, 0]);
+	  this.rotation = Util.convertRotation([0, angle, 0], Util.RADIAN);
 	}
 
 
   // -------------------------------------------------------
   // Utils
   // -------------------------------------------------------
-  _roundRect(ctx, x, y, w, h, r) {
-    ctx.beginPath();
-    ctx.moveTo(x + r, y);
-    ctx.lineTo(x + w - r, y);
-    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
-    ctx.lineTo(x + w, y + h - r);
-    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-    ctx.lineTo(x + r, y + h);
-    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
-    ctx.lineTo(x, y + r);
-    ctx.quadraticCurveTo(x, y, x + r, y);
-    ctx.closePath();
-  }
-  
-  	convertRotation(inArray) {
-	  if(inArray.length==4){
-		  return inArray;
-	  }else if(inArray.length==3){
-		  const [x, y, z] = inArray;
 
-		  const cx = Math.cos(x / 2);
-		  const sx = Math.sin(x / 2);
-		  const cy = Math.cos(y / 2);
-		  const sy = Math.sin(y / 2);
-		  const cz = Math.cos(z / 2);
-		  const sz = Math.sin(z / 2);
-
-		  const qw = cx * cy * cz + sx * sy * sz;
-		  const qx = sx * cy * cz - cx * sy * sz;
-		  const qy = cx * sy * cz + sx * cy * sz;
-		  const qz = cx * cy * sz - sx * sy * cz;
-
-		  return [qx, qy, qz, qw];
-	}else{
-			// invalid!
-	}
-  }
-  
+    
 }

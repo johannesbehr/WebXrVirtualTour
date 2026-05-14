@@ -1,6 +1,6 @@
 import {CachedGltf2Node} from './cached-gltf2-node.js';
 import {SignNode} from './sign-node.js';
-
+import {Util} from './util.js'
 
 export class HotspotNode extends CachedGltf2Node {
 	constructor(options){
@@ -15,40 +15,13 @@ export class HotspotNode extends CachedGltf2Node {
 		this._originalScale = [1, 1, 1];
 		this.text = options.text || null;
 		this._signNode = null;
+		this._angle = 0;
+		this._alwaysShowSign = false;
 		if (this.text) {
 			this._createSignNode();
 		}
 		console.log("Hotspot created!");
-	}
-	
-	static convertRotation(inArray) {
-	  if(inArray.length==4){
-		  return inArray;
-	  }else if(inArray.length==3){
-		  const [xDeg, yDeg, zDeg] = inArray;
-
-		  // Grad → Radiant
-		  const x = xDeg * Math.PI / 180;
-		  const y = yDeg * Math.PI / 180;
-		  const z = zDeg * Math.PI / 180;
-
-		  const cx = Math.cos(x / 2);
-		  const sx = Math.sin(x / 2);
-		  const cy = Math.cos(y / 2);
-		  const sy = Math.sin(y / 2);
-		  const cz = Math.cos(z / 2);
-		  const sz = Math.sin(z / 2);
-
-		  const qw = cx * cy * cz + sx * sy * sz;
-		  const qx = sx * cy * cz - cx * sy * sz;
-		  const qy = cx * sy * cz + sx * cy * sz;
-		  const qz = cx * cy * sz - sx * sy * cz;
-
-		  return [qx, qy, qz, qw];
-	}else{
-			// invalid!
-	}
-  }
+	}	
 	
 	static create(hotspot, callback, baseDir = null) {
 		let url = 'media/gltf/hotspots/arrow2.glb';
@@ -67,8 +40,8 @@ export class HotspotNode extends CachedGltf2Node {
 		}
 
 		let hotspotNode = new HotspotNode({url:url,callback:callback, action:hotspot.action, text:hotspot.text});
-		hotspotNode.rotation = HotspotNode.convertRotation(hotspot.rotation);
 		hotspotNode.translation = hotspot.translation;
+		hotspotNode.rotation = Util.convertRotation(hotspot.rotation);
 		hotspotNode._originalScale = hotspotNode.scale = hotspot.scale;
 		//hotspotNode.action = hotspot.action;
 		hotspotNode.id = hotspot.id;
@@ -85,7 +58,8 @@ export class HotspotNode extends CachedGltf2Node {
 		});
 
 		// Initial unsichtbar
-		this._signNode.visible = false;
+		if(!this._alwaysShowSign)
+			this._signNode.visible = false;
 
 		// Position relativ zum Hotspot:
 		// 1.6 m Augenhöhe + etwas Abstand nach oben
@@ -98,23 +72,44 @@ export class HotspotNode extends CachedGltf2Node {
 		this.addNode(this._signNode);
   }
   
-	 set rotation(value) {
-	  // 1. Originalverhalten behalten
-	  super.rotation = value;
+	set rotation(value) {
+		// 1. Originalverhalten behalten
+		super.rotation = value;
 
-	  if (this._signNode && value) {
+		if (this._signNode && value) {
 
-		// Quaternion: [x, y, z, w]
-		const x = value[0];
-		const y = value[1];
-		const z = value[2];
-		const w = value[3];
+			// Quaternion: [x, y, z, w]
+			const x = value[0];
+			const y = value[1];
+			const z = value[2];
+			const w = value[3];
 
-		// inverse rotation
-		const inv = [-x, -y, -z, w];
+			// inverse rotation
+			const inv = [-x, -y, -z, w];
+			
+			this._signNode.rotation = Util.multQ(inv, Util.convertRotation([0,this._angle,0], Util.RADIAN));
+			
+//			const e = Util.toEuler(value, Util.RADIAN);
+//			this._signNode.rotation = Util.convertRotation([-e[0],-e[1] + this._angle,-e[2]], Util.RADIAN);
+			
+		}
+	}
+	
+	set translation(value) {
+		// 1. Originalverhalten behalten
+		super.translation = value;
 
-		this._signNode.rotation = inv;
-	  }
+		if (this._signNode && value) {
+
+			// Quaternion: [x, y, z, w]
+			const x = value[0];
+			const y = value[1];
+			const z = value[2];
+
+			this._angle = -(Math.PI/2) - Math.atan2(z, x);
+			
+			//this._signNode.rotation = Util.convertRotation([0,this._angle,0], Util.RADIAN);
+		}
 	}
   
 	
@@ -123,7 +118,7 @@ export class HotspotNode extends CachedGltf2Node {
 	this._originalScale = this.scale;
 	this.scale = this.scale.map(x => x * 1.1);
 	
-	if (this._signNode) {
+	if (this._signNode && !this._alwaysShowSign) {
       this._signNode.visible = true;
     }
 	
@@ -134,7 +129,7 @@ export class HotspotNode extends CachedGltf2Node {
     this._hovered = false;
 	this.scale = this._originalScale;
 
-	if (this._signNode) {
+	if (this._signNode && !this._alwaysShowSign) {
       this._signNode.visible = false;
     }
 

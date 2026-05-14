@@ -35,7 +35,7 @@
 		  "style" : "arrow",
           "text": "Nach rechts",
           "translation": [10, -10, -20],
-          "rotation": [0, 0, 180],
+          "rotation": [0, 180, 0],
           "scale": [40, 40, 40],
           "action": {
             "type": "changeRoom",
@@ -64,7 +64,7 @@
 		        {
           "id": "back_to_eingang_from_innen",
 		  "style" : "arrow",
-          "text": "Zurück zum Eingang",
+          "text": "Treppe hoch",
           "translation": [-10, -15, -300],
           "rotation": [-70, 180, 30],
           "scale": [220, 220, 220],
