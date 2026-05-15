@@ -141,8 +141,8 @@ async playSound(url) {
 
 
 		this.removeNode(this.sign);
-		this.sign = new SignNode(room.title);
-		this.sign.translation = [0, 0, -2];
+		this.sign = new SignNode(room.title, {fontSize: 196});
+		this.sign.translation = [0, 1.1, -4];
 		this.addNode(this.sign);
 
 		// Debug-Ausgabe		

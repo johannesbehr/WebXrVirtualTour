@@ -20,15 +20,16 @@ export class HotspotNode extends CachedGltf2Node {
 		if (this.text) {
 			this._createSignNode();
 		}
+		this.textSize = 20;
 		console.log("Hotspot created!");
 	}	
 	
 	static create(hotspot, callback, baseDir = null) {
-		let url = 'media/gltf/hotspots/arrow2.glb';
+		let url = 'media/gltf/hotspots/arrow_white.glb';
 
 		switch(hotspot.style){
 			case "ring":
-				url = 'media/gltf/hotspots/ring.glb';
+				url = 'media/gltf/hotspots/ring2.glb';
 			break;
 			case "custom":
 				url = hotspot.customModel;
@@ -42,7 +43,11 @@ export class HotspotNode extends CachedGltf2Node {
 		let hotspotNode = new HotspotNode({url:url,callback:callback, action:hotspot.action, text:hotspot.text});
 		hotspotNode.translation = hotspot.translation;
 		hotspotNode.rotation = Util.convertRotation(hotspot.rotation);
+		if(hotspot.textSize){
+			hotspotNode.textSize = hotspot.textSize;
+		}
 		hotspotNode._originalScale = hotspotNode.scale = hotspot.scale;
+
 		//hotspotNode.action = hotspot.action;
 		hotspotNode.id = hotspot.id;
 
@@ -63,10 +68,7 @@ export class HotspotNode extends CachedGltf2Node {
 
 		// Position relativ zum Hotspot:
 		// 1.6 m Augenhöhe + etwas Abstand nach oben
-		this._signNode.translation = [0, 0.1, 0];
-
-		// Optional etwas kleiner skalieren
-		this._signNode.scale = [1, 1, 1];
+		this._signNode.translation = [0, 0.15, 0];
 
 		// Als Kind hinzufügen, damit es sich mit dem Hotspot bewegt
 		this.addNode(this._signNode);
@@ -86,7 +88,7 @@ export class HotspotNode extends CachedGltf2Node {
 
 			// inverse rotation
 			const inv = [-x, -y, -z, w];
-			
+			//this._signNode.rotation = Util.convertRotation([0,0,0], Util.RADIAN);
 			this._signNode.rotation = Util.multQ(inv, Util.convertRotation([0,this._angle,0], Util.RADIAN));
 			
 //			const e = Util.toEuler(value, Util.RADIAN);
@@ -111,12 +113,29 @@ export class HotspotNode extends CachedGltf2Node {
 			//this._signNode.rotation = Util.convertRotation([0,this._angle,0], Util.RADIAN);
 		}
 	}
+	
+	set scale(value) {
+
+		super.scale = value;
+
+		if (this._signNode && value) {
+			const [x1,y1,z1] = this._signNode.originalScale;
+			const [x2,y2,z2] = value;
+			const s = this.textSize;
+			
+			this._signNode.scale = [s*x1/x2,s*y1/y2,s*z1/z2];
+		}
+	}
+
+	get scale(){
+		return this._scale;
+	}
   
 	
   onHoverStart() {
     this._hovered = true;
 	this._originalScale = this.scale;
-	this.scale = this.scale.map(x => x * 1.1);
+	this.scale = this._originalScale.map(x => x * 1.1);
 	
 	if (this._signNode && !this._alwaysShowSign) {
       this._signNode.visible = true;

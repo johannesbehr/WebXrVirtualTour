@@ -5,6 +5,7 @@ export class Hotspot {
   constructor({
     id,
     text = "",
+	textSize = 20,
     translation,
     rotation = [0, 0, 0, 1],
     scale = [1, 1, 1],
@@ -25,6 +26,7 @@ export class Hotspot {
 
     this.id = id;
     this.text = text;
+	this.textSize = textSize;
     this.translation = translation;
 	this.rotation = rotation;
     this.scale = scale;

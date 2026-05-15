@@ -54,8 +54,9 @@ export class SignNode extends Node {
     super();
 
     this.text = text;
-
-    this.options = {
+	this.originalScale =[1,1,1];
+    
+	this.options = {
       fontSize: 64,
       fontFamily: "Arial",
       padding: 20,
@@ -171,7 +172,7 @@ export class SignNode extends Node {
     const w = this.canvas.width / pxPerMeter;
     const h = this.canvas.height / pxPerMeter;
 
-    this.scale = [w, h, 1];
+    this.originalScale = this.scale = [w, h, 1];
   }
 
   // -------------------------------------------------------
