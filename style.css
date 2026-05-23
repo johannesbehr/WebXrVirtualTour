@@ -1,0 +1,101 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f0f2f5;
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+}
+
+.map-panel {
+    flex: 1;
+    overflow: auto;
+    background: #dfe6e9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#mapContainer {
+    position: relative;
+    width: 785px;
+    height: 866px;
+    border: 2px solid #555;
+    background: white;
+    overflow: hidden;
+}
+
+#mapImage {
+    width: 785px;
+    height: 866px;
+    display: block;
+    user-select: none;
+    pointer-events: none;
+}
+
+#pointsLayer {
+    position: absolute;
+    inset: 0;
+}
+
+.point {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: #e74c3c;
+    border: 2px solid white;
+    border-radius: 50%;
+    cursor: grab;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 6px rgba(0,0,0,0.4);
+}
+
+.point:active {
+    cursor: grabbing;
+}
+
+.point-label {
+    position: absolute;
+	display: none; 
+    top: -22px;
+    left: 12px;
+    background: rgba(0,0,0,0.75);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+	pointer-events: none;
+}
+
+.editor-panel {
+    width: 400px;
+    background: white;
+    border-left: 2px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.editor-panel h2 {
+    margin-top: 0;
+}
+
+#jsonEditor {
+    flex: 1;
+    width: 100%;
+    resize: none;
+    font-family: Consolas, monospace;
+    font-size: 14px;
+    padding: 12px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    line-height: 1.5;
+}
