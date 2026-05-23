@@ -11,8 +11,8 @@
           "id": "to_innen",
 		  "style" : "arrow",
           "text": "Pausenhalle betreten",
-		  "textSize":70,
-          "translation": [0, -20, -80],
+		  "textSize":50,
+          "translation": [0, -20, -60],
           "rotation": [0, -90, 0],
           "scale": [120, 120, 120],
           "action": {
