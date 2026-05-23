@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TourEditor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-container">
+
+    <div class="map-panel">
+        <div id="mapContainer">
+            <img id="mapImage" src="map2.png" alt="Karte">
+
+            <!-- Punkte werden dynamisch eingefügt -->
+            <div id="pointsLayer"></div>
+        </div>
+    </div>
+
+    <div class="editor-panel">
+        <h2>JSON-Daten</h2>
+
+        <textarea id="jsonEditor">
+{
+  "points": [
+    {
+      "id": "0271",
+      "location": [295.0, 136.7]
+    },
+    {
+      "id": "0272",
+      "location": [120.5, 200.3]
+    }
+  ]
+}
+        </textarea>
+    </div>
+
+</div>
+
+<script src="tour-editor.js"></script>
+</body>
+</html>

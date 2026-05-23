@@ -135,6 +135,8 @@ async playSound(url) {
 		// Create new HotspotNodes to hotspots in room
 		room.hotspots.forEach(h => {
 			let hotspot = HotspotNode.create(h,()=>this.hotspot_onClick(h), this.baseDir);
+			
+			
 			this.addNode(hotspot);
 			this.hotspots.push(hotspot);
 		});

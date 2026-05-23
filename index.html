@@ -31,14 +31,23 @@
 	
 <script type="module">
 
-
+const roomId = new URLSearchParams(window.location.search).get('roomId');
+const tour = new URLSearchParams(window.location.search).get('tour');
 
 import { VirtualTourScene } from './js/virtual-tour/virtual-tour-scene.js';
-let tourUrl = "./tourdata/hbs_rundgang.json"
+
+
+let tourUrl = "./tourdata/";
+
+if(tour!== null){
+	tourUrl += tour;
+}else{
+	tourUrl += "hbs_rundgang.json";
+}
+
+
 let scene = await VirtualTourScene.create(tourUrl);
 
-
-const roomId = new URLSearchParams(window.location.search).get('roomId');
 if (roomId !== null) {
   scene.loadRoom(roomId);
 }

@@ -9,7 +9,7 @@ export class VirtualTour {
     this.title = title;
     this.startRoomId = startRoomId;
 
-    this.rooms = rooms.map(r => new Room(r));
+    this.rooms = rooms.map(r => new Room(r, this));
 
     // Map für schnellen Zugriff
     this.roomMap = new Map();

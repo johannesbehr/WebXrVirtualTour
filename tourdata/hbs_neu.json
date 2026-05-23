@@ -1,0 +1,99 @@
+{
+  "title": "Virtueller Rundgang Heinrich-Büssing-Schule",
+  "startRoomId": "0268",
+  "rooms": [
+    { "id": "0268",
+      "title": "Eingang Gebäude G",
+	  "location" : [309.8,124.5],
+      "image": "images/0268.jpg",
+	  "rotation" : [0 , -50 , 0],
+      "hotspots": [{"targetId":"0269"}]
+    },
+	{ "id": "0269",
+      "location" : [305.1,128.0],
+	  "rotation" : [0 , -50 , 0],
+      "hotspots": [{"targetId":"0268"},{"targetId":"0270"}]
+    },
+	{ "id": "0270",
+      "location" : [300.2,132.2],
+	  "rotation" : [0 , -50 , 0],
+      "hotspots": [{"targetId":"0269"},{"targetId":"0271"}]
+    },
+	{ "id": "0271",
+      "location" : [295.0,136.7],
+	  "rotation" : [0 , -50 , 0],
+	"hotspots": [{"targetId":"0270"}, {"targetId":"0272"}]
+    },
+	{ "id": "0272",
+      "location" : [289.1,141.4],
+	  "rotation" : [0 , -50 , 0],
+      "hotspots": [{"targetId":"0271"},{"targetId":"0273"}]
+    },
+	{ "id": "0273",
+      "location" : [282.0,146.3],
+	  "rotation" : [0 , -50 , 0],
+      "hotspots": [{"targetId":"0272"},{"targetId":"0274"}]
+    },
+	{ "id": "0274",
+      "location" : [275.0,151.9],
+	  "rotation" : [0 , -50 , 0],
+      "hotspots": [{"targetId":"0273"},{"targetId":"0275"}]
+    },
+	{ "id": "0275",
+      "location" : [268.8,156.8],
+	  "rotation" : [0 , -50 , 0],
+      "hotspots": [{"targetId":"0274"},{"targetId":"0276"}]
+    },
+	{ "id": "0276",
+      "location" : [264.6,160.5],
+	  "rotation" : [0 , -50 , 0],
+      "hotspots": [{"targetId":"0275"},{"targetId":"0277"}]
+    },
+	{ "id": "0277",
+      "location" : [259.6,165.3],
+	  "rotation" : [0 , -50 , 0],
+      "hotspots": [{"targetId":"0276"},{"targetId":"0278"}]
+    },
+	{ "id": "0278",
+      "location" : [255.0,170.0],
+	  "rotation" : [0 , -50 , 0],
+      "hotspots": [{"targetId":"0277"},{"targetId":"0279"}]
+    },
+	{ "id": "0279",
+      "location" : [248.9,174.4],
+	  "rotation" : [0 , -50 , 0],
+      "hotspots": [{"targetId":"0278"},{"targetId":"0280"}]
+    },
+	{ "id": "0280",
+      "location" : [241.9,179.3],
+	  "rotation" : [0 , -50 , 0],
+      "hotspots": [{"targetId":"0279"},{"targetId":"0281"}]
+    },
+	{ "id": "0281",
+      "location" : [234.2,184.6],
+	  "rotation" : [0 , -50 , 0],
+      "hotspots": [{"targetId":"0280"},{"targetId":"0282"}]
+    },
+	{ "id": "0282",
+      "location" : [227.0,191.2],
+	  "rotation" : [0 , -50 , 0],
+      "hotspots": [{"targetId":"0281"},{"targetId":"0283"},{"targetId":"0284"}  ]
+    },
+	{ "id": "0283",
+      "location" : [219.5,198.0],
+	  "rotation" : [0 , -50 , 0],
+      "hotspots": [{"targetId":"0282"},{"targetId":"0284"}]
+    },
+	{ "id": "0284",
+      "location" : [226.4,206.2],
+	  "rotation" : [0 , -50 , 0],
+      "hotspots": [{"targetId":"0283"},{"targetId":"0285"}]
+    },
+	{ "id": "0285",
+      "location" : [233.7,213.4],
+	  "rotation" : [0 , -50 , 0],
+      "hotspots": [{"targetId":"0284"}]
+    }
+	
+	]
+}
