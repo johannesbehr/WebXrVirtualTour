@@ -73,6 +73,8 @@ export class HotspotNode extends CachedGltf2Node {
 		  color: 'white',
 		  padding: 20
 		});
+		
+
 
 		// Initial unsichtbar
 		if(!this._alwaysShowSign)
@@ -84,6 +86,9 @@ export class HotspotNode extends CachedGltf2Node {
 
 		// Als Kind hinzufügen, damit es sich mit dem Hotspot bewegt
 		this.addNode(this._signNode);
+				
+		this._signNode.selectable = false;
+		
   }
   
 	set rotation(value) {
