@@ -18,7 +18,7 @@ export class VirtualTourScene extends Scene {
     super();
 
 	this.skybox = null;
-	this.currentRoom = null;
+	this.currentViewPoint = null;
 	this.tour = null;
 	this.xrButton = null;
 	this.gl = null;
@@ -74,7 +74,7 @@ export class VirtualTourScene extends Scene {
 	this.soundCache = {};
 	
 	
-	this.loadRoom(tour.startRoomId);
+	this.loadViewPoint(tour.startPointId);
 	
 	console.log("Virtual Tour started.");
 	
@@ -118,22 +118,22 @@ async playSound(url) {
    Raum anzeigen
 ========================= */
 
-	loadRoom(roomId) {
-		const room = this.tour.getRoom(roomId);
-		this.currentRoom = room;
+	loadViewPoint(viewPointId) {
+		const viewPoint = this.tour.getViewPoint(viewPointId);
+		this.currentViewPoint = viewPoint;
 
-		// Set the new Skybox for the room
-		let url = room.image;
+		// Set the new Skybox for the viewPoint
+		let url = viewPoint.image;
 		if(this.baseDir) url = this.baseDir +  url;
 		this.changeSkybox(url);
-		this.skybox.rotation = Util.convertRotation(room.rotation);
+		this.skybox.rotation = Util.convertRotation(viewPoint.rotation);
 		
 		// Remove all old hotspotNodes
 		this.hotspots.forEach(h => { this.removeNode(h);});
 		this.hotspots = [];
 		
-		// Create new HotspotNodes to hotspots in room
-		room.hotspots.forEach(h => {
+		// Create new HotspotNodes to hotspots in viewPoint
+		viewPoint.hotspots.forEach(h => {
 			let hotspot = HotspotNode.create(h,()=>this.hotspot_onClick(h), this.baseDir);
 			
 			
@@ -143,12 +143,12 @@ async playSound(url) {
 
 
 		this.removeNode(this.sign);
-		this.sign = new SignNode(room.title, {fontSize: 196});
+		this.sign = new SignNode(viewPoint.title, {fontSize: 196});
 		this.sign.translation = [0, 1.1, -4];
 		this.addNode(this.sign);
 
 		// Debug-Ausgabe		
-		console.log("Aktueller Raum:", room);
+		console.log("Aktueller Raum:", viewPoint);
 	}
 
 	changeSkybox(newUrl){
@@ -299,10 +299,10 @@ async playSound(url) {
 		
 		let action = sender.action;
 		if(action){
-			if (action.type === "changeRoom") {
-				let nextRoom = action.targetRoomId;
-				console.log("Next Room:", nextRoom);
-				this.loadRoom(nextRoom);
+			if (action.type === "changeViewPoint") {
+				let nextViewPoint = action.targetViewPointId;
+				console.log("Next ViewPoint:", nextViewPoint);
+				this.loadViewPoint(nextViewPoint);
 			}else if(action.type ==="script"){
 				const fn = new Function(action.script);
 				fn.call(this);

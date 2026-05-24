@@ -13,11 +13,11 @@ export class Hotspot {
 	targetId = "",
 	style,
     action
-  }, room) {
+  }, viewPoint) {
     //if (!id) throw new Error("Hotspot braucht eine ID");
 	
 	if(targetId!==""){
-		action = {type:"changeRoom", targetRoomId:targetId};
+		action = {type:"changeViewPoint", targetViewPointId:targetId};
 		style =  "ring";
 		scale = [200, 200, 200];
 	}else
@@ -39,7 +39,7 @@ export class Hotspot {
     this.scale = scale;
 	this.customModel = customModel;
     this.style = style;
-	this.room = room;
+	this.viewPoint = viewPoint;
     this.action = Action.create(action);
   }
 }

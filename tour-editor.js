@@ -44,7 +44,7 @@ function parseEditorContent() {
     try {
         const parsed = JSON.parse(jsonEditor.value);
 
-        if (!parsed.points || !Array.isArray(parsed.points)) {
+        if (!parsed.viewPoints || !Array.isArray(parsed.viewPoints)) {
             return;
         }
 
@@ -86,7 +86,7 @@ function renderPoints() {
 
     pointsLayer.innerHTML = "";
 
-    data.points.forEach((point, index) => {
+    data.viewPoints.forEach((point, index) => {
 
         const xMeter = point.location[0];
         const yMeter = point.location[1];
@@ -110,6 +110,8 @@ function renderPoints() {
         label.textContent = point.id;
 		if (selectedPointIndex === index) {
 			label.style.display = "block";
+			pointElement.style.background = "orange"
+			
 		}
 
 
@@ -170,7 +172,7 @@ document.addEventListener("mousemove", (event) => {
     /*
         Daten aktualisieren
     */
-    data.points[dragInfo.index].location = [
+    data.viewPoints[dragInfo.index].location = [
         Number(xMeter.toFixed(1)),
         Number(yMeter.toFixed(1))
     ];

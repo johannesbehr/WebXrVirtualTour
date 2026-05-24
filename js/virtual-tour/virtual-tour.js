@@ -1,31 +1,31 @@
 // VirtualTour.js
-import { Room } from "./room.js";
+import { ViewPoint } from "./view-point.js";
 
 export class VirtualTour {
-  constructor({ title, startRoomId, rooms }) {
+  constructor({ title, startPointId, viewPoints }) {
     if (!title) throw new Error("VirtualTour braucht einen Titel");
-    if (!startRoomId) throw new Error("startRoomId fehlt");
+    if (!startPointId) throw new Error("startPointId fehlt");
 
     this.title = title;
-    this.startRoomId = startRoomId;
+    this.startPointId = startPointId;
 
-    this.rooms = rooms.map(r => new Room(r, this));
+    this.viewPoints = viewPoints.map(r => new ViewPoint(r, this));
 
     // Map für schnellen Zugriff
-    this.roomMap = new Map();
-    this.rooms.forEach(room => {
-      if (this.roomMap.has(room.id)) {
-        throw new Error(`Doppelte Room-ID: ${room.id}`);
+    this.viewPointMap = new Map();
+    this.viewPoints.forEach(viewPoint => {
+      if (this.viewPointMap.has(viewPoint.id)) {
+        throw new Error(`Doppelte ViewPoint-ID: ${viewPoint.id}`);
       }
-      this.roomMap.set(room.id, room);
+      this.viewPointMap.set(viewPoint.id, viewPoint);
     });
 
-    if (!this.roomMap.has(this.startRoomId)) {
-      throw new Error("Start-Raum existiert nicht");
+    if (!this.viewPointMap.has(this.startPointId)) {
+      throw new Error("Start-Punkt existiert nicht");
     }
   }
 
-  getRoom(id) {
-    return this.roomMap.get(id) || null;
+  getViewPoint(id) {
+    return this.viewPointMap.get(id) || null;
   }
 }

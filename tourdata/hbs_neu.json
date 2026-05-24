@@ -1,7 +1,7 @@
 {
   "title": "Virtueller Rundgang Heinrich-Büssing-Schule",
-  "startRoomId": "0268",
-  "rooms": [
+  "startPointId": "0268",
+  "viewPoints": [
     { "id": "0268",
       "title": "Eingang Gebäude G",
 	  "location" : [309.8,124.5],

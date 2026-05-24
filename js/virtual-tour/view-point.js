@@ -1,9 +1,9 @@
-// Room.js
+// ViewPoint.js
 import { Hotspot } from "./hotspot.js";
 
-export class Room {
+export class ViewPoint {
   constructor({ id, title = "", image, audio = null, rotation = [0, 0, 0, 1], hotspots = [], location = [0,0]}, tour) {
-    if (!id) throw new Error("Room braucht eine ID");
+    if (!id) throw new Error("ViewPoint braucht eine ID");
     if (!image){
 		image = "images/" + id + ".jpg";
 	}

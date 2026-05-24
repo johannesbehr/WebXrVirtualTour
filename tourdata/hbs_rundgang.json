@@ -1,7 +1,7 @@
 {
   "title": "Virtueller Rundgang Heinrich-Büssing-Schule",
-  "startRoomId": "Haupteingang",
-  "rooms": [
+  "startPointId": "Haupteingang",
+  "viewPoints": [
     { "id": "Haupteingang",
       "title": "Haupteingang",
       "image": "images/image-JrkFBmS7_Haupteingang.jpg",
@@ -17,7 +17,7 @@
           "scale": [120, 120, 120],
           "action": {
             "type": "script",
-            "script":"this.loadRoom('innen1');this.playSound('sounds/Gong.mp3');"
+            "script":"this.loadViewPoint('innen1');this.playSound('sounds/Gong.mp3');"
           }
         },{
           "id": "to_links",
@@ -27,8 +27,8 @@
           "rotation": [0, 0, 0],
           "scale": [40, 40, 40],
           "action": {
-            "type": "changeRoom",
-            "targetRoomId": "links"
+            "type": "changeViewPoint",
+            "targetViewPointId": "links"
           }
         },
         {
@@ -39,8 +39,8 @@
           "rotation": [0, 180, 0],
           "scale": [40, 40, 40],
           "action": {
-            "type": "changeRoom",
-            "targetRoomId": "rechts"
+            "type": "changeViewPoint",
+            "targetViewPointId": "rechts"
           }
         }
       ]
@@ -59,8 +59,8 @@
           "rotation": [0, 90, 0],
           "scale": [120, 120, 120],
           "action": {
-            "type": "changeRoom",
-            "targetRoomId": "Haupteingang"
+            "type": "changeViewPoint",
+            "targetViewPointId": "Haupteingang"
           }
 		}, 
 		        {
@@ -72,8 +72,8 @@
           "rotation": [-70, 180, 30],
           "scale": [220, 220, 220],
           "action": {
-            "type": "changeRoom",
-            "targetRoomId": "innen"
+            "type": "changeViewPoint",
+            "targetViewPointId": "innen"
           }
 		}, 
 		
@@ -110,8 +110,8 @@
           "rotation": [0, 0.707, 0, 0.707],
           "scale": [40, 40, 40],
           "action": {
-            "type": "changeRoom",
-            "targetRoomId": "Haupteingang"
+            "type": "changeViewPoint",
+            "targetViewPointId": "Haupteingang"
           }
         }
       ]
@@ -147,8 +147,8 @@
           "rotation": [0, 0, 0],
           "scale": [150, 150, 150],
           "action": {
-            "type": "changeRoom",
-             "targetRoomId": "innen1"
+            "type": "changeViewPoint",
+             "targetViewPointId": "innen1"
           }
 		}, 
         {

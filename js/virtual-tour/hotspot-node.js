@@ -1,7 +1,7 @@
 import {CachedGltf2Node} from './cached-gltf2-node.js';
 import {SignNode} from './sign-node.js';
 import {Util} from './util.js';
-import {ChangeRoomAction} from './action.js';
+import {ChangeViewPointAction} from './action.js';
 
 export class HotspotNode extends CachedGltf2Node {
 	constructor(options){
@@ -44,10 +44,10 @@ export class HotspotNode extends CachedGltf2Node {
 		let hotspotNode = new HotspotNode({url:url,callback:callback, action:hotspot.action, text:hotspot.text});
 		
 		if(hotspot.targetId!==""){
-			const room = hotspot.room;
-			const targetRoom = room.tour.getRoom(hotspot.targetId);
-			const dx = targetRoom.location[0] - room.location[0];
-			const dy = targetRoom.location[1] - room.location[1];
+			const viewPoint = hotspot.viewPoint;
+			const targetViewPoint = viewPoint.tour.getViewPoint(hotspot.targetId);
+			const dx = targetViewPoint.location[0] - viewPoint.location[0];
+			const dy = targetViewPoint.location[1] - viewPoint.location[1];
 			hotspotNode.translation = [dx*12,-20,dy*12];
 		}else{
 			hotspotNode.translation = hotspot.translation;

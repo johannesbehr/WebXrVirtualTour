@@ -7,8 +7,8 @@ export class Action {
   
   static create(data) {
     switch (data.type) {
-      case "changeRoom":
-        return new ChangeRoomAction(data);
+      case "changeViewPoint":
+        return new ChangeViewPointAction(data);
 	 case "script":
         return new ScriptAction(data);
       default:
@@ -17,12 +17,12 @@ export class Action {
   }
 }
 
-export class ChangeRoomAction extends Action {
-  constructor({ targetRoomId }) {
-    super("changeRoom");
-    if (!targetRoomId) throw new Error("Change Room braucht targetRoomId");
+export class ChangeViewPointAction extends Action {
+  constructor({ targetViewPointId }) {
+    super("changeViewPoint");
+    if (!targetViewPointId) throw new Error("Change ViewPoint braucht targetViewPointId");
 
-    this.targetRoomId = targetRoomId;
+    this.targetViewPointId = targetViewPointId;
   }
 }
 

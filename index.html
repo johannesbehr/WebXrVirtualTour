@@ -31,7 +31,7 @@
 	
 <script type="module">
 
-const roomId = new URLSearchParams(window.location.search).get('roomId');
+const viewPoint = new URLSearchParams(window.location.search).get('viewPointId');
 const tour = new URLSearchParams(window.location.search).get('tour');
 
 import { VirtualTourScene } from './js/virtual-tour/virtual-tour-scene.js';
@@ -48,8 +48,8 @@ if(tour!== null){
 
 let scene = await VirtualTourScene.create(tourUrl);
 
-if (roomId !== null) {
-  scene.loadRoom(roomId);
+if (viewPoint !== null) {
+  scene.loadViewPoint(viewPoint);
 }
 
 
