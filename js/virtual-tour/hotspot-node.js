@@ -1,7 +1,6 @@
 import {CachedGltf2Node} from './cached-gltf2-node.js';
 import {SignNode} from './sign-node.js';
 import {Util} from './util.js';
-import {ChangeViewPointAction} from './action.js';
 
 export class HotspotNode extends CachedGltf2Node {
 	constructor(options){
@@ -25,43 +24,53 @@ export class HotspotNode extends CachedGltf2Node {
 		console.log("Hotspot created!");
 	}	
 	
-	static create(hotspot, callback, baseDir = null) {
-		let url = 'media/gltf/hotspots/arrow_white.glb';
+	static create(options) {
 
-		switch(hotspot.style){
-			case "ring":
-				url = 'media/gltf/hotspots/ring2.glb';
-			break;
-			case "custom":
-				url = hotspot.customModel;
-				if(baseDir) url = baseDir +  url;
-			break;
-			//case "arrow":
-			default:
-			break;
+		const hotspot = options.hotspot;
+		const callback = options.callback;
+		const baseDir = options.baseDir;
+
+		let url = 'media/gltf/hotspots/ring2.glb';
+		let action = null;
+		let text = null;
+		let scale = options.scale;
+		let rotation = [0,0,0];
+		let translation = options.translation;
+		let textSize = null;
+
+		if(hotspot!=null){
+			switch(hotspot.style){
+				case "ring":
+					url = 'media/gltf/hotspots/ring2.glb';
+				break;
+				case "custom":
+					url = hotspot.customModel;
+					if(baseDir) url = baseDir +  url;
+				break;
+				case "arrow":
+					url = 'media/gltf/hotspots/arrow_white.glb';
+				default:
+				break;
+			}
+			
+			action = hotspot.action;
+			text = hotspot.text;
+			translation = hotspot.translation;
+			scale = hotspot.scale;
+			rotation = hotspot.rotation;
+			textSize = hotspot.textSize;
 		}
 
-		let hotspotNode = new HotspotNode({url:url,callback:callback, action:hotspot.action, text:hotspot.text});
+		let hotspotNode = new HotspotNode({url:url,callback:callback, action:action, text:text});
 		
-		if(hotspot.targetId!==""){
-			const viewPoint = hotspot.viewPoint;
-			const targetViewPoint = viewPoint.tour.getViewPoint(hotspot.targetId);
-			const dx = targetViewPoint.location[0] - viewPoint.location[0];
-			const dy = targetViewPoint.location[1] - viewPoint.location[1];
-			hotspotNode.translation = [dx*12,-20,dy*12];
-		}else{
-			hotspotNode.translation = hotspot.translation;
-		}
-		
-		
-		hotspotNode.rotation = Util.convertRotation(hotspot.rotation);
-		if(hotspot.textSize){
-			hotspotNode.textSize = hotspot.textSize;
-		}
-		hotspotNode._originalScale = hotspotNode.scale = hotspot.scale;
 
-		//hotspotNode.action = hotspot.action;
-		hotspotNode.id = hotspot.id;
+			
+		hotspotNode.translation = translation;
+		hotspotNode.rotation = Util.convertRotation(rotation);
+		if(textSize){
+			hotspotNode.textSize = textSize;
+		}
+		hotspotNode._originalScale = hotspotNode.scale = scale;
 
 		return hotspotNode;
 	}

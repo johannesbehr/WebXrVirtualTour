@@ -6,8 +6,8 @@ import {WebXRButton} from './../util/webxr-button.js';
 import {InlineViewerHelper} from './../util/inline-viewer-helper.js';
 import {HotspotNode} from './hotspot-node.js';
 import {SignNode} from './sign-node.js';
-import {Util} from './util.js'
-
+import {Util} from './util.js';
+import {ChangeViewPointAction} from './action.js';
 
 export class VirtualTourScene extends Scene {
 
@@ -132,9 +132,22 @@ async playSound(url) {
 		this.hotspots.forEach(h => { this.removeNode(h);});
 		this.hotspots = [];
 		
+		// Create new HotspotNodes for each viewPoint next to this
+		viewPoint.nextPoints.forEach(n => {
+			
+			const targetViewPoint = viewPoint.tour.getViewPoint(n);
+			const dx = targetViewPoint.location[0] - viewPoint.location[0];
+			const dy = targetViewPoint.location[1] - viewPoint.location[1];
+			const translation = [dx*12,-20,dy*12];
+			const action = new ChangeViewPointAction({targetViewPointId:n});
+			let hotspot = HotspotNode.create({translation:translation,callback:()=>this.hotspot_onClick({action:action}), scale:[300,300,300]});
+			this.addNode(hotspot);
+			this.hotspots.push(hotspot);
+		});
+		
 		// Create new HotspotNodes to hotspots in viewPoint
 		viewPoint.hotspots.forEach(h => {
-			let hotspot = HotspotNode.create(h,()=>this.hotspot_onClick(h), this.baseDir);
+			let hotspot = HotspotNode.create({hotspot:h,callback:()=>this.hotspot_onClick(h), baseDir:this.baseDir});
 			
 			
 			this.addNode(hotspot);
