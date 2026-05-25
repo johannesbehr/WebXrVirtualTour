@@ -61,7 +61,11 @@ function parseEditorContent() {
 /*
     JSON aktualisieren
 */
-function updateEditor() {
+function updateEditor(newData = null) {
+	if(newData){
+		data=newData;
+	}
+	
     let text = JSON.stringify(data, null, 2);
 	//text = text.replace(/\[\s*([-\d.]+)\s*,\s*([-\d.]+)\s*\]/g, '[$1,$2]');
 	text = compactNumericArrays(text);
@@ -86,6 +90,9 @@ function renderPoints() {
 
     pointsLayer.innerHTML = "";
 
+	let currentPoint = null;
+
+
     data.viewPoints.forEach((point, index) => {
 
         const xMeter = point.location[0];
@@ -108,13 +115,13 @@ function renderPoints() {
         const label = document.createElement("div");
         label.className = "point-label";
         label.textContent = point.id;
+		
+		
+		
 		if (selectedPointIndex === index) {
 			label.style.display = "block";
 			pointElement.style.background = "orange"
-			
 		}
-
-
 
         pointElement.appendChild(label);
 
@@ -134,8 +141,16 @@ function renderPoints() {
 			
         });
 
-        pointsLayer.appendChild(pointElement);
+		if (selectedPointIndex === index) {
+			currentPoint = pointElement;
+		}else{
+			pointsLayer.appendChild(pointElement);
+		}
     });
+	
+	if(currentPoint){
+		pointsLayer.appendChild(currentPoint);
+	}
 }
 
 
@@ -198,4 +213,4 @@ jsonEditor.addEventListener("input", () => {
 /*
     Initialisieren
 */
-parseEditorContent();
+//parseEditorContent();

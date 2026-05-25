@@ -1,0 +1,173 @@
+{
+  "title": "Virtueller Rundgang Heinrich-Büssing-Schule",
+  "startPointId": "Haupteingang",
+  "viewPoints": [
+    { "id": "Haupteingang",
+      "title": "Haupteingang",
+      "image": "images/image-JrkFBmS7_Haupteingang.jpg",
+	  "rotation" : [0 , 180 , 0],
+      "hotspots": [		
+        {
+          "id": "to_innen",
+		  "style" : "arrow",
+          "text": "Pausenhalle betreten",
+		  "textSize":50,
+          "translation": [0, -20, -60],
+          "rotation": [0, -90, 0],
+          "scale": [120, 120, 120],
+          "action": {
+            "type": "script",
+            "script":"this.loadViewPoint('innen1');this.playSound('sounds/Gong.mp3');"
+          }
+        },{
+          "id": "to_links",
+		  "style" : "arrow",
+          "text": "Nach links",
+          "translation": [-10, -10, -20],
+          "rotation": [0, 0, 0],
+          "scale": [40, 40, 40],
+          "action": {
+            "type": "changeViewPoint",
+            "targetViewPointId": "links"
+          }
+        },
+        {
+          "id": "to_rechts",
+		  "style" : "arrow",
+          "text": "Nach rechts",
+          "translation": [10, -10, -20],
+          "rotation": [0, 180, 0],
+          "scale": [40, 40, 40],
+          "action": {
+            "type": "changeViewPoint",
+            "targetViewPointId": "rechts"
+          }
+        }
+      ]
+    },
+    { "id": "innen1",
+      "title": "Pausenhalle Gebäude B",
+      "image": "images/image-MJnuIS1e_Pausenhalle1_B.jpg",
+	  "rotation" : [0 , 130 , 0],
+      "hotspots": [
+        {
+          "id": "back_to_eingang_from_innen",
+		  "style" : "arrow",
+          "text": "Pausenhalle verlassen",
+		  "textSize":70,
+          "translation": [0, -20, 80],
+          "rotation": [0, 90, 0],
+          "scale": [120, 120, 120],
+          "action": {
+            "type": "changeViewPoint",
+            "targetViewPointId": "Haupteingang"
+          }
+		}, 
+		        {
+          "id": "back_to_eingang_from_innen",
+		  "style" : "arrow",
+          "text": "Treppe hoch",
+		  "textSize":200,
+          "translation": [-10, -15, -300],
+          "rotation": [-70, 180, 30],
+          "scale": [220, 220, 220],
+          "action": {
+            "type": "changeViewPoint",
+            "targetViewPointId": "innen"
+          }
+		}, 
+		
+
+		  
+        {
+          "id": "gong",
+		  "style" : "custom",
+		  "customModel" : "models/symbols/bell3.glb",
+          "text": "Gong",
+		  "textSize":15,
+
+          "translation": [0, -10, -20],
+          "rotation": [0, 0, 0],
+          "scale": [80, 80, 80],
+          "action": {
+            "type": "script",
+            "script": "this.playSound('sounds/Gong.mp3');"
+          }
+        }
+		
+		
+      ]
+    },
+    { "id": "links",
+      "title": "Zwischen Gebäude G, F und der Helene-Engelbrecht-Schule",
+      "image": "images/image-kDXaoElF_vor_Helene.jpg",
+      "hotspots": [
+        {
+          "id": "back_to_eingang_from_links",
+		  "style" : "arrow",
+          "text": "Zurück zum Haupteingang",
+          "translation": [0, -10, 20],
+          "rotation": [0, 0.707, 0, 0.707],
+          "scale": [40, 40, 40],
+          "action": {
+            "type": "changeViewPoint",
+            "targetViewPointId": "Haupteingang"
+          }
+        }
+      ]
+    },
+    { "id": "rechts",
+      "title": "Vor Gebäude A",
+      "image": "images/image-eOYD3L2p_Seite.jpg",
+      "hotspots": [
+        {
+          "id": "back_to_eingang_from_rechts",
+		  "style" : "arrow",
+          "text": "Zurück zum Haupteingang",
+          "translation": [-7, -10, -14],
+          "rotation": [0, -50, 0],
+          "scale": [40, 40, 40],
+          "action": {
+            "type": "script",
+            "script": "this.loadRoom('Haupteingang');"
+          }
+        }
+      ]
+    },
+    { "id": "innen",
+      "title": "Pausenhalle Gebäude B, auf der Treppe",
+      "image": "images/image-DoPScfLl_Pausenhalle2_B.jpg",
+	  "rotation" : [-3 , 90 , 0],
+      "hotspots": [
+
+		  				        {
+         "id": "back_to_pausenhalle1_from_treppe",
+		  "style" : "ring",
+          "translation": [-18, -20, 80],
+          "rotation": [0, 0, 0],
+          "scale": [150, 150, 150],
+          "action": {
+            "type": "changeViewPoint",
+             "targetViewPointId": "innen1"
+          }
+		}, 
+        {
+          "id": "gong",
+		  "style" : "custom",
+		  "customModel" : "models/symbols/bell3.glb",
+          "text": "Gong",
+		  "textSize": 10,
+          "translation": [0, -10, -20],
+          "rotation": [0, 0, 0],
+          "scale": [80, 80, 80],
+          "action": {
+            "type": "script",
+            "script": "this.playSound('sounds/Gong.mp3');"
+          }
+        }
+		
+		
+      ]
+    }
+  ]
+}
