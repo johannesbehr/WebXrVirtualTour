@@ -1,6 +1,6 @@
 {
   "title": "Virtueller Rundgang Heinrich-Büssing-Schule",
-"map" : "map3.png",
+  "map": "map3.png",
   "startPointId": "0296",
   "viewPoints": [
     {
@@ -246,7 +246,7 @@
     },
     {
       "id": "0296",
-      "location": [88.1,144],
+      "location": [87.1,141],
       "rotation": [0,-50,0],
       "nextPoints": [
         "0291",
@@ -310,7 +310,7 @@
     },
     {
       "id": "0304",
-      "location": [123,190.3],
+      "location": [126.4,194.1],
       "rotation": [0,-50,0],
       "nextPoints": [
         "0303",
@@ -319,7 +319,7 @@
     },
     {
       "id": "0305",
-      "location": [115,194.9],
+      "location": [117.4,199.4],
       "rotation": [0,-50,0],
       "nextPoints": [
         "0304",
@@ -328,7 +328,7 @@
     },
     {
       "id": "0306",
-      "location": [108.5,199.2],
+      "location": [110.4,205.2],
       "rotation": [0,-50,0],
       "nextPoints": [
         "0305",
@@ -337,7 +337,7 @@
     },
     {
       "id": "0307",
-      "location": [100,204.8],
+      "location": [103.6,210.1],
       "rotation": [0,-50,0],
       "nextPoints": [
         "0306",
@@ -346,7 +346,7 @@
     },
     {
       "id": "0308",
-      "location": [93.5,208.2],
+      "location": [97.1,215.2],
       "rotation": [0,30,0],
       "nextPoints": [
         "0307",
@@ -475,7 +475,7 @@
     },
     {
       "id": "0323",
-      "location": [101.7,135.3],
+      "location": [98.3,131.5],
       "rotation": [0,-50,0],
       "nextPoints": [
         "0324"
@@ -483,7 +483,7 @@
     },
     {
       "id": "0324",
-      "location": [96.8,139.2],
+      "location": [93.4,135.2],
       "rotation": [0,-50,0],
       "nextPoints": [
         "0296",
@@ -493,7 +493,7 @@
     },
     {
       "id": "0325",
-      "location": [108.2,133.4],
+      "location": [105.3,129.4],
       "rotation": [0,-50,0],
       "nextPoints": [
         "0324",
@@ -511,7 +511,7 @@
     },
     {
       "id": "0327",
-      "location": [115.7,130],
+      "location": [114.7,129.1],
       "rotation": [0,-50,0],
       "nextPoints": [
         "0326",
@@ -547,7 +547,7 @@
     },
     {
       "id": "0331",
-      "location": [109.2,121.7],
+      "location": [107.7,120.2],
       "rotation": [0,-50,0],
       "nextPoints": [
         "0330",
@@ -556,7 +556,7 @@
     },
     {
       "id": "0332",
-      "location": [113.1,127.6],
+      "location": [111.3,126.5],
       "rotation": [0,-50,0],
       "nextPoints": [
         "0331",
@@ -565,7 +565,7 @@
     },
     {
       "id": "0333",
-      "location": [108.5,122],
+      "location": [106.5,120.4],
       "rotation": [0,-50,0],
       "nextPoints": [
         "0332",
