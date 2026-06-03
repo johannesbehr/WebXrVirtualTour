@@ -16,7 +16,8 @@
 
     <div class="map-panel">
         <div id="mapContainer">
-            <img id="mapImage" src="map2.png" alt="Karte">
+            <!--<img id="mapImage" src="map2.png" alt="Karte">-->
+			<img id="mapImage" alt="Karte">
 
             <!-- Punkte werden dynamisch eingefügt -->
             <div id="pointsLayer"></div>
@@ -34,6 +35,9 @@
 
 <script src="tour-editor.js"></script>
 <script type="module"> 
+
+
+
 const tour = new URLSearchParams(window.location.search).get('tour');
 let tourUrl = "./tourdata/";
 if(tour!== null){
@@ -44,6 +48,9 @@ if(tour!== null){
 
  const data = await fetch(tourUrl).then(r => r.json());
  const jsonEditor = document.getElementById("jsonEditor");
+const mapImage = document.getElementById("mapImage");
+	mapImage.src = "./tourdata/images/map.png"
+
  updateEditor(data);
  parseEditorContent();
 

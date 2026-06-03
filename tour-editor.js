@@ -1,11 +1,13 @@
 const MAP_WIDTH_PX = 785;
-const MAP_HEIGHT_PX = 866;
+const MAP_HEIGHT_PX = 1000;
 
-const REAL_WIDTH_M = 190.0;
-const REAL_HEIGHT_M = 209.6;
+//const REAL_WIDTH_M = 190.0;
+//const REAL_HEIGHT_M = 209.6;
 
 const jsonEditor = document.getElementById("jsonEditor");
 const pointsLayer = document.getElementById("pointsLayer");
+
+let m2p = 785 / 190.0;
 
 let data = {
     points: []
@@ -18,22 +20,26 @@ let selectedPointIndex = null;
     Meter -> Pixel
 */
 function meterToPixelX(meter) {
-    return (meter / REAL_WIDTH_M) * MAP_WIDTH_PX;
+    //return (meter / REAL_WIDTH_M) * MAP_WIDTH_PX;
+	return (meter * m2p);
 }
 
 function meterToPixelY(meter) {
-    return (meter / REAL_HEIGHT_M) * MAP_HEIGHT_PX;
+    //return (meter / REAL_HEIGHT_M) * MAP_HEIGHT_PX;
+	return (meter * m2p);
 }
 
 /*
     Pixel -> Meter
 */
 function pixelToMeterX(px) {
-    return (px / MAP_WIDTH_PX) * REAL_WIDTH_M;
+    //return (px / MAP_WIDTH_PX) * REAL_WIDTH_M;
+	return (px / m2p);
 }
 
 function pixelToMeterY(py) {
-    return (py / MAP_HEIGHT_PX) * REAL_HEIGHT_M;
+    //return (py / MAP_HEIGHT_PX) * REAL_HEIGHT_M;
+	return (py / m2p);
 }
 
 /*
