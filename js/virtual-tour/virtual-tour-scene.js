@@ -122,6 +122,7 @@ async playSound(url) {
 		const viewPoint = this.tour.getViewPoint(viewPointId);
 		this.currentViewPoint = viewPoint;
 
+
 		// Set the new Skybox for the viewPoint
 		let url = viewPoint.image;
 		if(this.baseDir) url = this.baseDir +  url;
@@ -131,20 +132,38 @@ async playSound(url) {
 		// Remove all old hotspotNodes
 		this.hotspots.forEach(h => { this.removeNode(h);});
 		this.hotspots = [];
-		
+				
 		// Create new HotspotNodes for each viewPoint next to this
 		viewPoint.nextPoints.forEach(n => {
+			
 			
 			const targetViewPoint = viewPoint.tour.getViewPoint(n);
 			const dx = targetViewPoint.location[0] - viewPoint.location[0];
 			const dy = targetViewPoint.location[1] - viewPoint.location[1];
-			const translation = [dx*12,-20,dy*12];
+			const dist =  Math.hypot(dx, dy);
 			const action = new ChangeViewPointAction({targetViewPointId:n});
+			
+			// First create a hotspot
+			let translation = [dx*12,-20,dy*12];
 			let hotspot = HotspotNode.create({translation:translation,callback:()=>this.hotspot_onClick({action:action}), scale:[300,300,300]});
 			this.addNode(hotspot);
 			this.hotspots.push(hotspot);
+			
+			// Now create an arrow pointing to the Hotspot
+			let angle = Math.atan2(dx, dy) * 180 / Math.PI;
+			
+			translation = [40*dx/dist,-20,40*dy/dist];
+			let arrow = HotspotNode.create({style:"arrow",rotation:[0,angle+90,0],translation:translation,callback:()=>this.hotspot_onClick({action:action}), scale:[400,200,200]});
+			arrow.setTransparency(0.2);
+			this.addNode(arrow);
+			this.hotspots.push(arrow);
+			
+			
+			
 		});
 		
+		
+		let x;
 		// Create new HotspotNodes to hotspots in viewPoint
 		viewPoint.hotspots.forEach(h => {
 			let hotspot = HotspotNode.create({hotspot:h,callback:()=>this.hotspot_onClick(h), baseDir:this.baseDir});
@@ -152,6 +171,8 @@ async playSound(url) {
 			
 			this.addNode(hotspot);
 			this.hotspots.push(hotspot);
+			
+			let x = h;
 		});
 
 
@@ -162,6 +183,12 @@ async playSound(url) {
 
 		// Debug-Ausgabe		
 		console.log("Aktueller Raum:", viewPoint);
+		
+		
+		let ht = HotspotNode.create({hotspot:x,callback:null, baseDir:this.baseDir});
+			
+		console.log(JSON.stringify(ht, null, 2));
+		
 	}
 
 	changeSkybox(newUrl){

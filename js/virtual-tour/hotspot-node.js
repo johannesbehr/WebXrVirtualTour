@@ -27,19 +27,30 @@ export class HotspotNode extends CachedGltf2Node {
 	static create(options) {
 
 		const hotspot = options.hotspot;
+
 		const callback = options.callback;
 		const baseDir = options.baseDir;
 
-		let url = 'media/gltf/hotspots/ring2.glb';
+		let style = options.style ?? "ring";
+		let scale = options.scale ?? [1,1,1];
+		let rotation = options.rotation ?? [0,0,0];
+		let translation = options.translation ?? [0,0,0];
 		let action = null;
 		let text = null;
-		let scale = options.scale;
-		let rotation = [0,0,0];
-		let translation = options.translation;
 		let textSize = null;
+		let url = options.url ?? "";
 
 		if(hotspot!=null){
-			switch(hotspot.style){
+			style = hotspot.style
+			action = hotspot.action;
+			text = hotspot.text;
+			translation = hotspot.translation;
+			scale = hotspot.scale;
+			rotation = hotspot.rotation;
+			textSize = hotspot.textSize;
+		}
+		
+		switch(style){
 				case "ring":
 					url = 'media/gltf/hotspots/ring2.glb';
 				break;
@@ -51,19 +62,9 @@ export class HotspotNode extends CachedGltf2Node {
 					url = 'media/gltf/hotspots/arrow_white.glb';
 				default:
 				break;
-			}
-			
-			action = hotspot.action;
-			text = hotspot.text;
-			translation = hotspot.translation;
-			scale = hotspot.scale;
-			rotation = hotspot.rotation;
-			textSize = hotspot.textSize;
 		}
 
 		let hotspotNode = new HotspotNode({url:url,callback:callback, action:action, text:text});
-		
-
 			
 		hotspotNode.translation = translation;
 		hotspotNode.rotation = Util.convertRotation(rotation);
@@ -163,6 +164,8 @@ export class HotspotNode extends CachedGltf2Node {
 	this._originalScale = this.scale;
 	this.scale = this._originalScale.map(x => x * 1.1);
 	
+	//this.setTransparency(1);
+	
 	if (this._signNode && !this._alwaysShowSign) {
       this._signNode.visible = true;
     }
@@ -173,6 +176,8 @@ export class HotspotNode extends CachedGltf2Node {
   onHoverEnd() {
     this._hovered = false;
 	this.scale = this._originalScale;
+	
+	//this.setTransparency(0.2);
 
 	if (this._signNode && !this._alwaysShowSign) {
       this._signNode.visible = false;
@@ -182,6 +187,6 @@ export class HotspotNode extends CachedGltf2Node {
 	console.log("Hotspot hover end");
   }
 
-	
+
 	
 }
