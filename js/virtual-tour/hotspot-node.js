@@ -52,14 +52,15 @@ export class HotspotNode extends CachedGltf2Node {
 		
 		switch(style){
 				case "ring":
-					url = 'media/gltf/hotspots/ring2.glb';
+					url = 'media/gltf/hotspots/ring2_alpha.glb';
 				break;
 				case "custom":
 					url = hotspot.customModel;
 					if(baseDir) url = baseDir +  url;
 				break;
 				case "arrow":
-					url = 'media/gltf/hotspots/arrow_white.glb';
+					//url = 'media/gltf/hotspots/arrow_white.glb';
+					url = 'media/gltf/hotspots/arrow_ new_alpha2.glb';
 				default:
 				break;
 		}

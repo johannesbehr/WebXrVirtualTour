@@ -152,7 +152,7 @@ async playSound(url) {
 			// Now create an arrow pointing to the Hotspot
 			let angle = Math.atan2(dx, dy) * 180 / Math.PI;
 			
-			translation = [40*dx/dist,-20,40*dy/dist];
+			translation = [50*dx/dist,-20,50*dy/dist];
 			let arrow = HotspotNode.create({style:"arrow",rotation:[0,angle+90,0],translation:translation,callback:()=>this.hotspot_onClick({action:action}), scale:[400,200,200]});
 			arrow.setTransparency(0.2);
 			this.addNode(arrow);
