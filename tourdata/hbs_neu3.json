@@ -6,15 +6,15 @@
     {
       "id": "0268",
       "title": "Eingang Gebäude G",
-      "location": [117.9,66.9],
-      "rotation": [0,-50,0],
+      "location": [116.4,65.7],
+      "rotation": [0,-45,0],
       "nextPoints": [
         "0269"
       ]
     },
     {
       "id": "0269",
-      "location": [111.1,71.4],
+      "location": [110.9,70],
       "rotation": [0,-50,0],
       "nextPoints": [
         "0268",
@@ -23,8 +23,8 @@
     },
     {
       "id": "0270",
-      "location": [105,76.2],
-      "rotation": [0,-60,0],
+      "location": [104.6,74.9],
+      "rotation": [0,-55,0],
       "nextPoints": [
         "0269",
         "0271"
@@ -32,7 +32,7 @@
     },
     {
       "id": "0271",
-      "location": [98.5,80.1],
+      "location": [98.8,79.5],
       "rotation": [0,-55,0],
       "nextPoints": [
         "0270",
@@ -41,8 +41,8 @@
     },
     {
       "id": "0272",
-      "location": [92.7,84.5],
-      "rotation": [0,-50,0],
+      "location": [92.9,83.6],
+      "rotation": [0,-55,0],
       "nextPoints": [
         "0271",
         "0273"
@@ -50,7 +50,7 @@
     },
     {
       "id": "0273",
-      "location": [86.6,88.6],
+      "location": [86.2,87.9],
       "rotation": [0,-50,0],
       "nextPoints": [
         "0272",
@@ -59,7 +59,7 @@
     },
     {
       "id": "0274",
-      "location": [80.8,93],
+      "location": [80.1,92.1],
       "rotation": [0,-50,0],
       "nextPoints": [
         "0273",
@@ -247,7 +247,7 @@
     {
       "id": "0296",
       "location": [87.1,141],
-      "rotation": [0,-50,0],
+      "rotation": [0,-40,0],
       "nextPoints": [
         "0291",
         "0298",
@@ -490,7 +490,7 @@
     },
     {
       "id": "0324",
-      "location": [96.6,135.4],
+      "location": [95.4,134.9],
       "rotation": [0,-50,0],
       "nextPoints": [
         "0296",
@@ -520,7 +520,7 @@
     },
     {
       "id": "0327",
-      "location": [115.7,134.4],
+      "location": [114.5,134.9],
       "rotation": [0,-50,0],
       "nextPoints": [
         "0326",
@@ -529,17 +529,18 @@
     },
     {
       "id": "0328",
-      "location": [119.3,131.7],
-      "rotation": [0,-50,0],
+      "location": [117.6,131.7],
+      "rotation": [0,50,0],
       "nextPoints": [
-        "0327","0332",
+        "0327",
+        "0332",
         "0329"
       ]
     },
     {
       "id": "0329",
       "location": [122,129],
-      "rotation": [0,-50,0],
+      "rotation": [0,50,0],
       "nextPoints": [
         "0328",
         "0330"

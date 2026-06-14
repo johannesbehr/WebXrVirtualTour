@@ -88,6 +88,31 @@ body {
     margin-top: 0;
 }
 
+.point-direction {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    width: 30px;
+    height: 2px;
+
+    background: #00ff00;
+
+    transform-origin: 0 50%;
+    pointer-events: none;
+}
+
+.point-direction::after {
+    content: "";
+    position: absolute;
+    right: -4px;
+    top: -4px;
+
+    border-left: 8px solid #00ff00;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+}
+
 #jsonEditor {
     flex: 1;
     width: 100%;

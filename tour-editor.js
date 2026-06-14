@@ -127,6 +127,19 @@ function renderPoints() {
 		if (selectedPointIndex === index) {
 			label.style.display = "block";
 			pointElement.style.background = "orange"
+			
+			const direction = document.createElement("div");
+			direction.className = "point-direction";
+
+			const heading = point.rotation?.[1] || 0;
+
+			direction.style.transform =
+			`translateY(-50%) rotate(${heading}deg)`;
+
+			pointElement.appendChild(direction);
+			console.log("Rot added");
+			
+			
 		}
 
         pointElement.appendChild(label);
