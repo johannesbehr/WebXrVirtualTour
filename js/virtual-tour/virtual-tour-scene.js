@@ -154,7 +154,7 @@ async playSound(url) {
 			
 			translation = [50*dx/dist,-20,50*dy/dist];
 			let arrow = HotspotNode.create({style:"arrow",rotation:[0,angle+90,0],translation:translation,callback:()=>this.hotspot_onClick({action:action}), scale:[400,200,200]});
-			arrow.setTransparency(0.2);
+			//arrow.setTransparency(0.2);
 			this.addNode(arrow);
 			this.hotspots.push(arrow);
 			
@@ -182,12 +182,12 @@ async playSound(url) {
 		this.addNode(this.sign);
 
 		// Debug-Ausgabe		
-		console.log("Aktueller Raum:", viewPoint);
+		console.log("Aktueller Raum:", viewPointId);
 		
 		
-		let ht = HotspotNode.create({hotspot:x,callback:null, baseDir:this.baseDir});
+		//let ht = HotspotNode.create({hotspot:x,callback:null, baseDir:this.baseDir});
 			
-		console.log(JSON.stringify(ht, null, 2));
+		//console.log(JSON.stringify(ht, null, 2));
 		
 	}
 
@@ -335,7 +335,7 @@ async playSound(url) {
 	}
 
 	hotspot_onClick(sender){
-		console.log("Hotspot clicked!");
+		//console.log("Hotspot clicked!");
 		
 		let action = sender.action;
 		if(action){

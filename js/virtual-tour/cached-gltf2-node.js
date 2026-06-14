@@ -83,15 +83,6 @@ export class CachedGltf2Node extends Node {
 
       this.addNode(instance);
 
-	
-	  if (this._alpha !== undefined) {
-		 
-		 console.log("this._renderPrimitives:"+ this._renderPrimitives);
-		 console.log("node._renderPrimitives:"+ instance._renderPrimitives);
-		  
-		this._applyTransparencyRecursive(instance, this._alpha);
-	  }
-
 
       this._resolver(instance.waitForComplete());
       this._resolver = null;
@@ -104,7 +95,7 @@ export class CachedGltf2Node extends Node {
       this._rejecter = null;
     });
 	
-	console.log("Renderer done:" + renderer);
+	//console.log("Renderer done:" + renderer);
 	
 	
   }

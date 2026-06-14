@@ -74,7 +74,7 @@ export class SignNode extends Node {
     this._material = null;
     this._renderPrimitive = null;
 
-	console.log("Sign Node created!");
+	//console.log("Sign Node created!");
 
 
   }

@@ -21,7 +21,7 @@ export class HotspotNode extends CachedGltf2Node {
 			this._createSignNode();
 		}
 		this.textSize = 20;
-		console.log("Hotspot created!");
+		//console.log("Hotspot created!");
 	}	
 	
 	static create(options) {
@@ -52,7 +52,7 @@ export class HotspotNode extends CachedGltf2Node {
 		
 		switch(style){
 				case "ring":
-					url = 'media/gltf/hotspots/ring2_alpha.glb';
+					url = 'media/gltf/hotspots/ring2_alpha3.glb';
 				break;
 				case "custom":
 					url = hotspot.customModel;
@@ -60,7 +60,7 @@ export class HotspotNode extends CachedGltf2Node {
 				break;
 				case "arrow":
 					//url = 'media/gltf/hotspots/arrow_white.glb';
-					url = 'media/gltf/hotspots/arrow_ new_alpha2.glb';
+					url = 'media/gltf/hotspots/arrow_ new_alpha4.glb';
 				default:
 				break;
 		}
@@ -171,7 +171,7 @@ export class HotspotNode extends CachedGltf2Node {
       this._signNode.visible = true;
     }
 	
-	console.log("Hotspot hover start");
+	//console.log("Hotspot hover start");
   }
 
   onHoverEnd() {
@@ -185,7 +185,7 @@ export class HotspotNode extends CachedGltf2Node {
     }
 
 
-	console.log("Hotspot hover end");
+	//console.log("Hotspot hover end");
   }
 
 
